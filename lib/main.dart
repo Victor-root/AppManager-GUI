@@ -353,6 +353,7 @@ class _AppManagerPageState extends State<AppManagerPage> {
   String? _stateFilter = 'all';
   String? _systemFilter = 'all';
   String? _checkFilter = 'all';
+  String _sortBy = 'name';
   double _panelWidth = 300;
   bool _isPanelVisible = true;
   String _viewMode = 'list';
@@ -384,24 +385,54 @@ class _AppManagerPageState extends State<AppManagerPage> {
     {'value': 'applicable', 'text': 'applicable'},
   ];
 
-  List<Map<String, dynamic>> get _filteredData => ManagerService.apps.values.where((item) {
-        final matchesSearch = (item['name']?.toString().toLowerCase().contains(_searchController.text.toLowerCase()) ?? false) ||
-            (item['package']?.toString().toLowerCase().contains(_searchController.text.toLowerCase()) ?? false);
-        final matchesState = _stateFilter == 'all' || (item['state']?.toString() == _stateFilter);
-        final matchesSystem = _systemFilter == 'all' || (item['isSystem'] == (_systemFilter == '1'));
-        final state = item['state'] as int?;
-        final isChecked = item['isChecked'] as bool?;
-        final action = item['action'] as String?;
-        final matchesCheck = _checkFilter == 'all' ? true :
-            _checkFilter == '1' ? (item['isChecked'] == true) :
-            _checkFilter == '0' ? (item['isChecked'] == false) :
-            (state != null && isChecked != null) &&
-                (action == 'install-disable' ||
-                    (state > 0 && isChecked == false) ||
-                    (state == 0 && isChecked == true) ||
-                    (state < 0 && isChecked == true));
-        return matchesSearch && matchesState && matchesSystem && matchesCheck;
-      }).toList();
+  final List<Map<String, String>> sortItems = [
+    {'value': 'name', 'text': 'sort_name_asc'},
+    {'value': 'name_desc', 'text': 'sort_name_desc'},
+    {'value': 'package', 'text': 'sort_package'},
+    {'value': 'state', 'text': 'sort_state'},
+    {'value': 'type', 'text': 'sort_type'},
+  ];
+
+  List<Map<String, dynamic>> get _filteredData {
+    final list = ManagerService.apps.values.where((item) {
+      final matchesSearch = (item['name']?.toString().toLowerCase().contains(_searchController.text.toLowerCase()) ?? false) ||
+          (item['package']?.toString().toLowerCase().contains(_searchController.text.toLowerCase()) ?? false);
+      final matchesState = _stateFilter == 'all' || (item['state']?.toString() == _stateFilter);
+      final matchesSystem = _systemFilter == 'all' || (item['isSystem'] == (_systemFilter == '1'));
+      final state = item['state'] as int?;
+      final isChecked = item['isChecked'] as bool?;
+      final action = item['action'] as String?;
+      final matchesCheck = _checkFilter == 'all' ? true :
+          _checkFilter == '1' ? (item['isChecked'] == true) :
+          _checkFilter == '0' ? (item['isChecked'] == false) :
+          (state != null && isChecked != null) &&
+              (action == 'install-disable' ||
+                  (state > 0 && isChecked == false) ||
+                  (state == 0 && isChecked == true) ||
+                  (state < 0 && isChecked == true));
+      return matchesSearch && matchesState && matchesSystem && matchesCheck;
+    }).toList();
+
+    list.sort((a, b) {
+      switch (_sortBy) {
+        case 'name_desc':
+          return (b['name']?.toString() ?? '').toLowerCase().compareTo((a['name']?.toString() ?? '').toLowerCase());
+        case 'package':
+          return (a['package']?.toString() ?? '').toLowerCase().compareTo((b['package']?.toString() ?? '').toLowerCase());
+        case 'state':
+          return (b['state'] as int? ?? 0).compareTo(a['state'] as int? ?? 0);
+        case 'type':
+          final aVal = a['isSystem'] == true ? 1 : 0;
+          final bVal = b['isSystem'] == true ? 1 : 0;
+          if (bVal != aVal) return bVal.compareTo(aVal);
+          return (a['name']?.toString() ?? '').toLowerCase().compareTo((b['name']?.toString() ?? '').toLowerCase());
+        default:
+          return (a['name']?.toString() ?? '').toLowerCase().compareTo((b['name']?.toString() ?? '').toLowerCase());
+      }
+    });
+
+    return list;
+  }
 
   void _copyToClipboard(String value) {
     Clipboard.setData(ClipboardData(text: value));
@@ -435,11 +466,18 @@ class _AppManagerPageState extends State<AppManagerPage> {
   @override
   void initState() {
     super.initState();
+    _showIcons = ConfigUtils.alwaysShowIcons;
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await _loadAppsFromDevice();   
+      await _loadAppsFromDevice();
     });
     _searchController.addListener(() => setState(() {}));
     Localization.languageNotifier.addListener(_onLanguageChanged);
+  }
+
+  Future<void> _setShowIcons(bool newValue) async {
+    _iconsReadyNotifier.value = ManagerService.iconsLoaded;
+    if (newValue && !ManagerService.iconsLoaded && !await _loadAppIcons()) return;
+    if (mounted) setState(() => _showIcons = newValue);
   }
 
   @override
@@ -629,6 +667,8 @@ class _AppManagerPageState extends State<AppManagerPage> {
                     ),
                   ),
                 ),
+                const SizedBox(width: 8),
+                _buildSortIconButton(),
               ],
             );
           },
@@ -867,6 +907,7 @@ class _AppManagerPageState extends State<AppManagerPage> {
                                                     builder: (_) => ConfigOverlay(
                                                       onConnect: _loadAppsFromDevice,
                                                       refreshUI: () => setState(() {}),
+                                                      onAlwaysShowIconsChanged: _setShowIcons,
                                                     ),
                                                   ),
                                                   delay: 500,
@@ -901,19 +942,18 @@ class _AppManagerPageState extends State<AppManagerPage> {
                                                     const SizedBox(height: 4),
                                                     Tooltip(
                                                       message: Localization.translate('icon_view_tooltip'),
-                                                      child: SwitchListTile(
-                                                        title: Text(Localization.translate('icon_view'), style: const TextStyle(fontSize: 13, color: Colors.white70), overflow: TextOverflow.ellipsis),
-                                                        value: _showIcons,
-                                                        onChanged: (newValue) async {
-                                                          _iconsReadyNotifier.value = ManagerService.iconsLoaded;
-                                                          if (newValue && !ManagerService.iconsLoaded && !await _loadAppIcons()) return;
-                                                          setState(() => _showIcons = newValue);
-                                                        },
-                                                        contentPadding: EdgeInsets.zero,
-                                                        activeTrackColor: Colors.blueAccent.withOpacity(0.5),
-                                                        inactiveTrackColor: Colors.grey[700],
-                                                        inactiveThumbColor: Colors.white70,
-                                                        visualDensity: const VisualDensity(horizontal: -2, vertical: -2),
+                                                      child: Material(
+                                                        type: MaterialType.transparency,
+                                                        child: SwitchListTile(
+                                                          title: Text(Localization.translate('icon_view'), style: const TextStyle(fontSize: 13, color: Colors.white70), overflow: TextOverflow.ellipsis),
+                                                          value: _showIcons,
+                                                          onChanged: _setShowIcons,
+                                                          contentPadding: EdgeInsets.zero,
+                                                          activeTrackColor: Colors.blueAccent.withOpacity(0.5),
+                                                          inactiveTrackColor: Colors.grey[700],
+                                                          inactiveThumbColor: Colors.white70,
+                                                          visualDensity: const VisualDensity(horizontal: -2, vertical: -2),
+                                                        ),
                                                       ),
                                                     ),
                                                   ],
@@ -1346,6 +1386,75 @@ class _AppManagerPageState extends State<AppManagerPage> {
     );
   }
 
+  Widget _buildSortIconButton() {
+    final isCustomSort = _sortBy != 'name';
+    return Tooltip(
+      message: Localization.translate('sort_label'),
+      child: GestureDetector(
+        onTap: () {
+          showModalBottomSheet(
+            context: context,
+            backgroundColor: Colors.transparent,
+            builder: (context) => Material(
+              color: Colors.grey[850]!.withOpacity(0.9),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+              clipBehavior: Clip.antiAlias,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    height: 4,
+                    width: 40,
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    decoration: BoxDecoration(
+                      color: Colors.white70,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                  ...sortItems.map(
+                    (item) => ListTile(
+                      title: Text(
+                        Localization.translate(item['text']!),
+                        style: TextStyle(
+                          color: item['value'] == _sortBy ? Colors.blueAccent : Colors.white,
+                          fontWeight: item['value'] == _sortBy ? FontWeight.w600 : FontWeight.w400,
+                          fontSize: 14,
+                        ),
+                      ),
+                      trailing: item['value'] == _sortBy
+                          ? const Icon(Icons.check, color: Colors.blueAccent, size: 20)
+                          : null,
+                      onTap: () {
+                        setState(() => _sortBy = item['value']!);
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                ],
+              ),
+            ),
+          );
+        },
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: isCustomSort ? Colors.blueAccent.withOpacity(0.2) : Colors.white.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: isCustomSort ? Colors.blueAccent : Colors.white.withOpacity(0.2),
+            ),
+          ),
+          child: Icon(
+            Icons.sort,
+            color: isCustomSort ? Colors.blueAccent : Colors.white70,
+            size: 18,
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildIOSToggleButton({
     required String label,
     required String? value,
@@ -1359,11 +1468,10 @@ class _AppManagerPageState extends State<AppManagerPage> {
             showModalBottomSheet(
               context: context,
               backgroundColor: Colors.transparent,
-              builder: (context) => Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey[850]!.withOpacity(0.9),
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-                ),
+              builder: (context) => Material(
+                color: Colors.grey[850]!.withOpacity(0.9),
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                clipBehavior: Clip.antiAlias,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [

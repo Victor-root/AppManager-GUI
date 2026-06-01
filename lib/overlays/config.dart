@@ -12,7 +12,8 @@ import 'package:app_manager/widgets/language_selector.dart';
 class ConfigOverlay extends StatefulWidget {
   final VoidCallback? onConnect;
   final VoidCallback? refreshUI;
-  const ConfigOverlay({this.onConnect, this.refreshUI, super.key});
+  final Future<void> Function(bool)? onAlwaysShowIconsChanged;
+  const ConfigOverlay({this.onConnect, this.refreshUI, this.onAlwaysShowIconsChanged, super.key});
 
   @override
   State<ConfigOverlay> createState() => ConfigOverlayState();
@@ -295,6 +296,18 @@ class ConfigOverlayState extends State<ConfigOverlay> with TickerProviderStateMi
                                 setState(() {});
                                 ConfigUtils.refreshIcons = value ?? false;
                                 ConfigUtils.save();
+                              },
+                            ),
+                            OptionItem(
+                              title: Localization.translate('always_show_icons'),
+                              tooltip: Localization.translate('always_show_icons_tooltip'),
+                              value: ConfigUtils.alwaysShowIcons,
+                              onChanged: (value) {
+                                final enabled = value ?? false;
+                                setState(() {});
+                                ConfigUtils.alwaysShowIcons = enabled;
+                                ConfigUtils.save();
+                                widget.onAlwaysShowIconsChanged?.call(enabled);
                               },
                             ),
                           ],

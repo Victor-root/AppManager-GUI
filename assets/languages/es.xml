@@ -43,6 +43,7 @@
   <translation key="browse_tooltip">Importar datos de la comunidad</translation>
   <translation key="settings_tooltip">Ajustes</translation>
   <translation key="icon_view_tooltip">Alternar vista de íconos</translation>
+  <translation key="view_mode_tooltip">Elige entre vista de lista y mosaico</translation>
   <translation key="import_tooltip">Importar acciones</translation>
   <translation key="export_tooltip">Exportar acciones actuales</translation>
   <translation key="select_adb_tooltip">Selecciona la ruta donde está el ejecutable ADB</translation>
@@ -101,8 +102,19 @@
   <translation key="actions_suffix">acciones.</translation>
   <translation key="icon_exported_to">Ícono exportado a</translation>
 
+  <!-- Sort Options -->
+  <translation key="sort_label">Ordenar</translation>
+  <translation key="sort_name_asc">Nombre (A→Z)</translation>
+  <translation key="sort_name_desc">Nombre (Z→A)</translation>
+  <translation key="sort_package">Paquete</translation>
+  <translation key="sort_state">Estado</translation>
+  <translation key="sort_type">Tipo</translation>
+
   <!-- Filter and Status Labels -->
   <translation key="no_matches">Sin coincidencias</translation>
+  <translation key="view_mode">Vista</translation>
+  <translation key="list_view">Lista</translation>
+  <translation key="mosaic_view">Mosaico</translation>
   <translation key="icon_view">Vista de íconos</translation>
   <translation key="activate" maxLength="15">Activar</translation>
   <translation key="install" maxLength="15">Instalar</translation>
@@ -155,6 +167,8 @@
   <translation key="never_uninstall">No desinstalar, solo desactivar</translation>
   <translation key="export_all_apps">Exportar lista de todas las apps</translation>
   <translation key="refresh_icons">Actualizar todos los íconos</translation>
+  <translation key="always_show_icons">Mostrar siempre los íconos</translation>
+  <translation key="always_show_icons_tooltip">Mostrar los íconos de las apps por defecto en las vistas de lista y mosaico</translation>
   <translation key="language">Idioma</translation>
 
   <!-- Device Selector -->

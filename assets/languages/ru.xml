@@ -43,6 +43,7 @@
   <translation key="browse_tooltip">Импортировать данные сообщества</translation>
   <translation key="settings_tooltip">Настройки</translation>
   <translation key="icon_view_tooltip">Переключить вид иконок</translation>
+  <translation key="view_mode_tooltip">Выберите между списком и мозаикой</translation>
   <translation key="import_tooltip">Импортировать действия</translation>
   <translation key="export_tooltip">Экспортировать текущие действия</translation>
   <translation key="select_adb_tooltip">Выберите путь к исполняемому файлу ADB</translation>
@@ -101,8 +102,19 @@
   <translation key="actions_suffix">действий.</translation>
   <translation key="icon_exported_to">Иконка экспортирована в</translation>
 
+  <!-- Sort Options -->
+  <translation key="sort_label">Сортировка</translation>
+  <translation key="sort_name_asc">Имя (A→Z)</translation>
+  <translation key="sort_name_desc">Имя (Z→A)</translation>
+  <translation key="sort_package">Пакет</translation>
+  <translation key="sort_state">Состояние</translation>
+  <translation key="sort_type">Тип</translation>
+
   <!-- Filter and Status Labels -->
   <translation key="no_matches">Нет совпадений</translation>
+  <translation key="view_mode">Вид</translation>
+  <translation key="list_view">Список</translation>
+  <translation key="mosaic_view">Мозаика</translation>
   <translation key="icon_view">Вид иконок</translation>
   <translation key="activate" maxLength="15">Активировать</translation>
   <translation key="install" maxLength="15">Установить</translation>
@@ -155,6 +167,8 @@
   <translation key="never_uninstall">Только деактивация, без удаления</translation>
   <translation key="export_all_apps">Экспорт всех приложений</translation>
   <translation key="refresh_icons">Обновить все иконки</translation>
+  <translation key="always_show_icons">Всегда показывать значки</translation>
+  <translation key="always_show_icons_tooltip">Показывать значки приложений по умолчанию в режимах списка и мозаики</translation>
   <translation key="language">Язык</translation>
 
   <!-- Device Selector -->

@@ -43,6 +43,7 @@
   <translation key="browse_tooltip">Importar dados da comunidade</translation>
   <translation key="settings_tooltip">Configurações</translation>
   <translation key="icon_view_tooltip">Alternar visualização de ícones</translation>
+  <translation key="view_mode_tooltip">Escolha entre visualização em lista e mosaico</translation>
   <translation key="import_tooltip">Importar ações</translation>
   <translation key="export_tooltip">Exportar ações atuais</translation>
   <translation key="select_adb_tooltip">Selecione o caminho onde está o executável ADB</translation>
@@ -101,8 +102,19 @@
   <translation key="actions_suffix">ações.</translation>
   <translation key="icon_exported_to">Ícone exportado para</translation>
 
+  <!-- Sort Options -->
+  <translation key="sort_label">Ordenar</translation>
+  <translation key="sort_name_asc">Nome (A→Z)</translation>
+  <translation key="sort_name_desc">Nome (Z→A)</translation>
+  <translation key="sort_package">Pacote</translation>
+  <translation key="sort_state">Estado</translation>
+  <translation key="sort_type">Tipo</translation>
+
   <!-- Filter and Status Labels -->
   <translation key="no_matches">Nenhuma correspondência</translation>
+  <translation key="view_mode">Exibição</translation>
+  <translation key="list_view">Lista</translation>
+  <translation key="mosaic_view">Mosaico</translation>
   <translation key="icon_view">Visualização de ícones</translation>
   <translation key="activate" maxLength="15">Ativar</translation>
   <translation key="install" maxLength="15">Instalar</translation>
@@ -155,6 +167,8 @@
   <translation key="never_uninstall">Nunca desinstalar, apenas desativar</translation>
   <translation key="export_all_apps">Exportar lista de todos os apps</translation>
   <translation key="refresh_icons">Atualizar todos os ícones</translation>
+  <translation key="always_show_icons">Sempre mostrar ícones</translation>
+  <translation key="always_show_icons_tooltip">Mostrar os ícones dos apps por padrão nas visualizações de lista e mosaico</translation>
   <translation key="language">Idioma</translation>
 
   <!-- Device Selector -->

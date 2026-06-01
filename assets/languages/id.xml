@@ -43,6 +43,7 @@
   <translation key="browse_tooltip">Impor data komunitas</translation>
   <translation key="settings_tooltip">Pengaturan</translation>
   <translation key="icon_view_tooltip">Alihkan tampilan ikon</translation>
+  <translation key="view_mode_tooltip">Pilih antara tampilan daftar dan mozaik</translation>
   <translation key="import_tooltip">Impor tindakan</translation>
   <translation key="export_tooltip">Ekspor tindakan saat ini</translation>
   <translation key="select_adb_tooltip">Pilih lokasi file eksekusi ADB</translation>
@@ -101,8 +102,19 @@
   <translation key="actions_suffix">tindakan.</translation>
   <translation key="icon_exported_to">Ikon diekspor ke</translation>
 
+  <!-- Sort Options -->
+  <translation key="sort_label">Urutkan</translation>
+  <translation key="sort_name_asc">Nama (A→Z)</translation>
+  <translation key="sort_name_desc">Nama (Z→A)</translation>
+  <translation key="sort_package">Paket</translation>
+  <translation key="sort_state">Status</translation>
+  <translation key="sort_type">Tipe</translation>
+
   <!-- Filter and Status Labels -->
   <translation key="no_matches">Tidak ada kecocokan</translation>
+  <translation key="view_mode">Tampilan</translation>
+  <translation key="list_view">Daftar</translation>
+  <translation key="mosaic_view">Mozaik</translation>
   <translation key="icon_view">Tampilan ikon</translation>
   <translation key="activate" maxLength="15">Aktifkan</translation>
   <translation key="install" maxLength="15">Pasang</translation>
@@ -155,6 +167,8 @@
   <translation key="never_uninstall">Jangan hapus, hanya nonaktifkan</translation>
   <translation key="export_all_apps">Ekspor daftar semua aplikasi</translation>
   <translation key="refresh_icons">Perbarui semua ikon</translation>
+  <translation key="always_show_icons">Selalu tampilkan ikon</translation>
+  <translation key="always_show_icons_tooltip">Tampilkan ikon aplikasi secara default di tampilan daftar dan mozaik</translation>
   <translation key="language">Bahasa</translation>
 
   <!-- Device Selector -->

@@ -43,6 +43,7 @@
   <translation key="browse_tooltip">Importă date comunitare</translation>
   <translation key="settings_tooltip">Setări</translation>
   <translation key="icon_view_tooltip">Comută vizualizarea cu pictograme</translation>
+  <translation key="view_mode_tooltip">Alege între vizualizarea listă și mozaic</translation>
   <translation key="import_tooltip">Importă acțiuni</translation>
   <translation key="export_tooltip">Exportă acțiunile curente</translation>
   <translation key="select_adb_tooltip">Selectează calea către executabilul ADB</translation>
@@ -101,8 +102,19 @@
   <translation key="actions_suffix">acțiuni.</translation>
   <translation key="icon_exported_to">Pictogramă exportată în</translation>
 
+  <!-- Sort Options -->
+  <translation key="sort_label">Sortare</translation>
+  <translation key="sort_name_asc">Nume (A→Z)</translation>
+  <translation key="sort_name_desc">Nume (Z→A)</translation>
+  <translation key="sort_package">Pachet</translation>
+  <translation key="sort_state">Stare</translation>
+  <translation key="sort_type">Tip</translation>
+
   <!-- Filter and Status Labels -->
   <translation key="no_matches">Nicio potrivire</translation>
+  <translation key="view_mode">Afișare</translation>
+  <translation key="list_view">Listă</translation>
+  <translation key="mosaic_view">Mozaic</translation>
   <translation key="icon_view">Vizualizare pictograme</translation>
   <translation key="activate" maxLength="15">Activează</translation>
   <translation key="install" maxLength="15">Instalează</translation>
@@ -155,6 +167,8 @@
   <translation key="never_uninstall">Nu dezinstala, doar dezactivează</translation>
   <translation key="export_all_apps">Exportă lista tuturor aplicațiilor</translation>
   <translation key="refresh_icons">Actualizează toate pictogramele</translation>
+  <translation key="always_show_icons">Afișează mereu pictogramele</translation>
+  <translation key="always_show_icons_tooltip">Afișează implicit pictogramele aplicațiilor în vizualizările listă și mozaic</translation>
   <translation key="language">Limbă</translation>
 
   <!-- Device Selector -->

@@ -44,7 +44,7 @@ class Localization {
       final document = XmlDocument.parse(xmlString);
       _currentLocale = {
         for (var element in document.findAllElements('translation'))
-          element.getAttribute('key')!: element.text
+          element.getAttribute('key')!: element.innerText
       };
       ConfigUtils.currentLanguage = languageCode;
       await ConfigUtils.save();
@@ -64,7 +64,7 @@ class Localization {
       final document = XmlDocument.parse(xmlString);
       return {
         for (var element in document.findAllElements('translation'))
-          element.getAttribute('key')!: element.text
+          element.getAttribute('key')!: element.innerText
       };
     } catch (e) {
       throw Exception('Critical error: Could not load default English locale: $e');

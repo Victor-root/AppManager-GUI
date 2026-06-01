@@ -43,6 +43,7 @@
   <translation key="browse_tooltip">Topluluk verilerini içe aktar</translation>
   <translation key="settings_tooltip">Ayarlar</translation>
   <translation key="icon_view_tooltip">Simge görünümünü aç/kapat</translation>
+  <translation key="view_mode_tooltip">Liste ve mozaik görünümü arasında seçim yapın</translation>
   <translation key="import_tooltip">İşlemleri içe aktar</translation>
   <translation key="export_tooltip">Mevcut işlemleri dışa aktar</translation>
   <translation key="select_adb_tooltip">ADB çalıştırılabilir dosyasının bulunduğu yolu seçin</translation>
@@ -101,8 +102,19 @@
   <translation key="actions_suffix">işlem.</translation>
   <translation key="icon_exported_to">Simge şuraya dışa aktarıldı:</translation>
 
+  <!-- Sort Options -->
+  <translation key="sort_label">Sırala</translation>
+  <translation key="sort_name_asc">Ad (A→Z)</translation>
+  <translation key="sort_name_desc">Ad (Z→A)</translation>
+  <translation key="sort_package">Paket</translation>
+  <translation key="sort_state">Durum</translation>
+  <translation key="sort_type">Tür</translation>
+
   <!-- Filter and Status Labels -->
   <translation key="no_matches">Eşleşme yok</translation>
+  <translation key="view_mode">Görünüm</translation>
+  <translation key="list_view">Liste</translation>
+  <translation key="mosaic_view">Mozaik</translation>
   <translation key="icon_view">Simge Görünümü</translation>
   <translation key="activate" maxLength="15">Etkinleştir</translation>
   <translation key="install" maxLength="15">Yükle</translation>
@@ -155,6 +167,8 @@
   <translation key="never_uninstall">Asla kaldırma, yalnızca devre dışı bırak</translation>
   <translation key="export_all_apps">Tüm uygulama listesini dışa aktar</translation>
   <translation key="refresh_icons">Tüm simgeleri yenile</translation>
+  <translation key="always_show_icons">Simgeleri her zaman göster</translation>
+  <translation key="always_show_icons_tooltip">Uygulama simgelerini liste ve mozaik görünümlerinde varsayılan olarak göster</translation>
   <translation key="language">Dil</translation>
 
   <!-- Device Selector -->

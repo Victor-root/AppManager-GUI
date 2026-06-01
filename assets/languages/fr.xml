@@ -102,6 +102,14 @@
   <translation key="actions_suffix">actions.</translation>
   <translation key="icon_exported_to">Icône exportée vers</translation>
 
+  <!-- Sort Options -->
+  <translation key="sort_label">Tri</translation>
+  <translation key="sort_name_asc">Nom (A→Z)</translation>
+  <translation key="sort_name_desc">Nom (Z→A)</translation>
+  <translation key="sort_package">Paquet</translation>
+  <translation key="sort_state">État</translation>
+  <translation key="sort_type">Type</translation>
+
   <!-- Filter and Status Labels -->
   <translation key="no_matches">Aucun résultat</translation>
   <translation key="view_mode">Affichage</translation>
@@ -159,6 +167,8 @@
   <translation key="never_uninstall">Ne jamais désinstaller, seulement désactiver</translation>
   <translation key="export_all_apps">Exporter la liste de toutes les apps</translation>
   <translation key="refresh_icons">Actualiser toutes les icônes</translation>
+  <translation key="always_show_icons">Toujours afficher les icônes</translation>
+  <translation key="always_show_icons_tooltip">Afficher les icônes des applications par défaut en vue liste et mosaïque</translation>
   <translation key="language">Langue</translation>
 
   <!-- Device Selector -->

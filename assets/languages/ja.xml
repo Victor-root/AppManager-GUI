@@ -43,6 +43,7 @@
   <translation key="browse_tooltip">コミュニティデータをインポート</translation>
   <translation key="settings_tooltip">設定</translation>
   <translation key="icon_view_tooltip">アイコンビューを切り替え</translation>
+  <translation key="view_mode_tooltip">リスト表示とモザイク表示を切り替えます</translation>
   <translation key="import_tooltip">アクションをインポート</translation>
   <translation key="export_tooltip">現在のアクションをエクスポート</translation>
   <translation key="select_adb_tooltip">ADB実行ファイルの場所を選択</translation>
@@ -101,8 +102,19 @@
   <translation key="actions_suffix">アクション。</translation>
   <translation key="icon_exported_to">アイコンをエクスポート：</translation>
 
+  <!-- Sort Options -->
+  <translation key="sort_label">並び替え</translation>
+  <translation key="sort_name_asc">名前 (A→Z)</translation>
+  <translation key="sort_name_desc">名前 (Z→A)</translation>
+  <translation key="sort_package">パッケージ</translation>
+  <translation key="sort_state">状態</translation>
+  <translation key="sort_type">種類</translation>
+
   <!-- Filter and Status Labels -->
   <translation key="no_matches">一致なし</translation>
+  <translation key="view_mode">表示</translation>
+  <translation key="list_view">リスト</translation>
+  <translation key="mosaic_view">モザイク</translation>
   <translation key="icon_view">アイコンビュー</translation>
   <translation key="activate" maxLength="15">有効化</translation>
   <translation key="install" maxLength="15">インストール</translation>
@@ -155,6 +167,8 @@
   <translation key="never_uninstall">アンインストールせず無効化のみ</translation>
   <translation key="export_all_apps">すべてのアプリリストをエクスポート</translation>
   <translation key="refresh_icons">すべてのアイコンを更新</translation>
+  <translation key="always_show_icons">常にアイコンを表示</translation>
+  <translation key="always_show_icons_tooltip">リスト表示とモザイク表示の両方でアプリのアイコンを既定で表示します</translation>
   <translation key="language">言語</translation>
 
   <!-- Device Selector -->

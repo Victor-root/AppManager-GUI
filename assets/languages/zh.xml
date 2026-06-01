@@ -43,6 +43,7 @@
   <translation key="browse_tooltip">导入社区数据</translation>
   <translation key="settings_tooltip">设置</translation>
   <translation key="icon_view_tooltip">切换图标视图</translation>
+  <translation key="view_mode_tooltip">在列表视图和马赛克视图之间选择</translation>
   <translation key="import_tooltip">导入操作</translation>
   <translation key="export_tooltip">导出当前操作</translation>
   <translation key="select_adb_tooltip">选择ADB可执行文件所在路径</translation>
@@ -101,8 +102,19 @@
   <translation key="actions_suffix">操作。</translation>
   <translation key="icon_exported_to">图标已导出到</translation>
 
+  <!-- Sort Options -->
+  <translation key="sort_label">排序</translation>
+  <translation key="sort_name_asc">名称 (A→Z)</translation>
+  <translation key="sort_name_desc">名称 (Z→A)</translation>
+  <translation key="sort_package">包名</translation>
+  <translation key="sort_state">状态</translation>
+  <translation key="sort_type">类型</translation>
+
   <!-- Filter and Status Labels -->
   <translation key="no_matches">无匹配项</translation>
+  <translation key="view_mode">视图</translation>
+  <translation key="list_view">列表</translation>
+  <translation key="mosaic_view">马赛克</translation>
   <translation key="icon_view">图标视图</translation>
   <translation key="activate" maxLength="15">激活</translation>
   <translation key="install" maxLength="15">安装</translation>
@@ -155,6 +167,8 @@
   <translation key="never_uninstall">仅禁用应用，不卸载</translation>
   <translation key="export_all_apps">导出所有应用列表</translation>
   <translation key="refresh_icons">刷新所有图标</translation>
+  <translation key="always_show_icons">始终显示图标</translation>
+  <translation key="always_show_icons_tooltip">在列表视图和马赛克视图中默认显示应用图标</translation>
   <translation key="language">语言</translation>
 
   <!-- Device Selector -->
