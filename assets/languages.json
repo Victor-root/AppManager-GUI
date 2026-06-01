@@ -1,5 +1,6 @@
 [
   {"name": "English", "file_name": "en.xml"},
+  {"name": "Français", "file_name": "fr.xml"},
   {"name": "Español", "file_name": "es.xml"},
   {"name": "Português (Brasil)", "file_name": "pt.xml"},
   {"name": "日本語", "file_name": "ja.xml"},
