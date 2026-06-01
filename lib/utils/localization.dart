@@ -12,6 +12,7 @@ class Localization {
   Localization._internal();
 
   static Map<String, String>? _currentLocale;
+  static Map<String, String>? _fallbackLocale;
 
   static Future<void> loadLanguages() async {
     try {
@@ -27,7 +28,17 @@ class Localization {
     }
   }
 
+  static Future<void> _ensureFallbackLocale() async {
+    if (_fallbackLocale != null) return;
+    try {
+      _fallbackLocale = await _loadDefaultLocale();
+    } catch (_) {
+      _fallbackLocale = {};
+    }
+  }
+
   static Future<void> loadLocale(String languageCode) async {
+    await _ensureFallbackLocale();
     try {
       final String xmlString = await rootBundle.loadString('assets/languages/$languageCode.xml');
       final document = XmlDocument.parse(xmlString);
@@ -61,6 +72,6 @@ class Localization {
   }
 
   static String translate(String key) {
-    return _currentLocale?[key] ?? key;
+    return _currentLocale?[key] ?? _fallbackLocale?[key] ?? key;
   }
 }

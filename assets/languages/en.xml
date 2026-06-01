@@ -42,7 +42,8 @@
   <translation key="log_tooltip">View last log</translation>
   <translation key="browse_tooltip">Import community data</translation>
   <translation key="settings_tooltip">Settings</translation>
-  <translation key="icon_view_tooltip">Toggle icon view</translation>
+  <translation key="icon_view_tooltip">Show app icons in both list and mosaic views</translation>
+  <translation key="view_mode_tooltip">Choose between list and mosaic view</translation>
   <translation key="import_tooltip">Import actions</translation>
   <translation key="export_tooltip">Export current actions</translation>
   <translation key="select_adb_tooltip">Select the path where the ADB executable is located</translation>
@@ -103,7 +104,10 @@
 
   <!-- Filter and Status Labels -->
   <translation key="no_matches">No matches</translation>
-  <translation key="icon_view">Icon View</translation>
+  <translation key="view_mode">View</translation>
+  <translation key="list_view">List</translation>
+  <translation key="mosaic_view">Mosaic</translation>
+  <translation key="icon_view">Show icons</translation>
   <translation key="activate" maxLength="15">Activate</translation>
   <translation key="install" maxLength="15">Install</translation>
   <translation key="uninstall" maxLength="15">Uninstall</translation>
@@ -115,7 +119,7 @@
   <translation key="enabled">Enabled</translation>
   <translation key="disabled">Disabled</translation>
   <translation key="uninstalled">Uninstalled</translation>
-  <translation key="system_user">System & User</translation>
+  <translation key="system_user">System &amp; User</translation>
   <translation key="system">System</translation>
   <translation key="user">User</translation>
   <translation key="any">Any</translation>

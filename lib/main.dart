@@ -355,7 +355,8 @@ class _AppManagerPageState extends State<AppManagerPage> {
   String? _checkFilter = 'all';
   double _panelWidth = 300;
   bool _isPanelVisible = true;
-  bool _loadIcons = false;
+  String _viewMode = 'list';
+  bool _showIcons = false;
   final ValueNotifier<bool> _isLoadingNotifier = ValueNotifier(false);
   final ValueNotifier<bool> _iconsReadyNotifier = ValueNotifier(false);
   Timer? _debounceTimer;
@@ -531,13 +532,13 @@ class _AppManagerPageState extends State<AppManagerPage> {
                             valueListenable: _isLoadingNotifier,
                             builder: (context, isLoading, child) => LoadingIndicator(
                               isLoadingApps: isLoading,
-                              loadIcons: _loadIcons,
+                              loadIcons: _showIcons,
                               iconsReady: _iconsReadyNotifier.value,
                               isFilteredDataEmpty: _filteredData.isEmpty,
                             ),
                           ),
                           Expanded(
-                            child: (_loadIcons && _iconsReadyNotifier.value)
+                            child: _viewMode == 'mosaic'
                                 ? _buildIconGrid(constraints.maxWidth)
                                 : _buildAppList(),
                           ),
@@ -833,7 +834,7 @@ class _AppManagerPageState extends State<AppManagerPage> {
                                                   onPressed: () async {
                                                     if (await AdbService.selectDevice(context, showSelector: true, loadAppsCallback: _loadAppsFromDevice)) {
                                                       setState(() {
-                                                        _loadIcons = false;
+                                                        _showIcons = false;
                                                         _iconsReadyNotifier.value = false;
                                                       });
                                                     }
@@ -874,7 +875,7 @@ class _AppManagerPageState extends State<AppManagerPage> {
                                             ),
                                             const SizedBox(height: 8),
                                             Container(
-                                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                                               decoration: BoxDecoration(
                                                 color: Colors.transparent,
                                                 borderRadius: BorderRadius.circular(8),
@@ -882,22 +883,40 @@ class _AppManagerPageState extends State<AppManagerPage> {
                                               ),
                                               child: FadeIn(
                                                 duration: const Duration(milliseconds: 550),
-                                                child: Tooltip(
-                                                  message: Localization.translate('icon_view_tooltip'),
-                                                  child: SwitchListTile(
-                                                    title: Text(Localization.translate('icon_view'), style: const TextStyle(fontSize: 13, color: Colors.white70), overflow: TextOverflow.ellipsis),
-                                                    value: _loadIcons,
-                                                    onChanged: (newValue) async {
-                                                      _iconsReadyNotifier.value = ManagerService.iconsLoaded;
-                                                      if (newValue && !ManagerService.iconsLoaded && !await _loadAppIcons()) return;
-                                                      setState(() => _loadIcons = newValue);
-                                                    },
-                                                    contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-                                                    activeTrackColor: Colors.blueAccent.withOpacity(0.5),
-                                                    inactiveTrackColor: Colors.grey[700],
-                                                    inactiveThumbColor: Colors.white70,
-                                                    visualDensity: const VisualDensity(horizontal: -2, vertical: -2),
-                                                  ),
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                                  children: [
+                                                    Padding(
+                                                      padding: const EdgeInsets.only(left: 4, bottom: 6),
+                                                      child: Text(
+                                                        Localization.translate('view_mode'),
+                                                        style: const TextStyle(fontSize: 12, color: Colors.white70, fontWeight: FontWeight.w600),
+                                                        overflow: TextOverflow.ellipsis,
+                                                      ),
+                                                    ),
+                                                    Tooltip(
+                                                      message: Localization.translate('view_mode_tooltip'),
+                                                      child: _buildViewModeSelector(),
+                                                    ),
+                                                    const SizedBox(height: 4),
+                                                    Tooltip(
+                                                      message: Localization.translate('icon_view_tooltip'),
+                                                      child: SwitchListTile(
+                                                        title: Text(Localization.translate('icon_view'), style: const TextStyle(fontSize: 13, color: Colors.white70), overflow: TextOverflow.ellipsis),
+                                                        value: _showIcons,
+                                                        onChanged: (newValue) async {
+                                                          _iconsReadyNotifier.value = ManagerService.iconsLoaded;
+                                                          if (newValue && !ManagerService.iconsLoaded && !await _loadAppIcons()) return;
+                                                          setState(() => _showIcons = newValue);
+                                                        },
+                                                        contentPadding: EdgeInsets.zero,
+                                                        activeTrackColor: Colors.blueAccent.withOpacity(0.5),
+                                                        inactiveTrackColor: Colors.grey[700],
+                                                        inactiveThumbColor: Colors.white70,
+                                                        visualDensity: const VisualDensity(horizontal: -2, vertical: -2),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ),
@@ -1063,6 +1082,85 @@ class _AppManagerPageState extends State<AppManagerPage> {
         ),
       );
 
+  Widget _buildViewModeSelector() => Container(
+        padding: const EdgeInsets.all(3),
+        decoration: BoxDecoration(
+          color: Colors.grey[850],
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.white.withOpacity(0.2)),
+        ),
+        child: Row(
+          children: [
+            _viewModeOption('list', Icons.view_list_rounded, Localization.translate('list_view')),
+            const SizedBox(width: 3),
+            _viewModeOption('mosaic', Icons.grid_view_rounded, Localization.translate('mosaic_view')),
+          ],
+        ),
+      );
+
+  Widget _viewModeOption(String mode, IconData icon, String label) {
+    final selected = _viewMode == mode;
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => setState(() => _viewMode = mode),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+          decoration: BoxDecoration(
+            color: selected ? Colors.blueAccent : Colors.transparent,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, size: 16, color: selected ? Colors.white : Colors.white60),
+              const SizedBox(width: 6),
+              Flexible(
+                child: Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+                    color: selected ? Colors.white : Colors.white60,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _appIconWidget(Map<String, dynamic> app, double size) {
+    final iconPath = app['iconPath'] as String?;
+    Widget image;
+    if (_showIcons &&
+        ManagerService.iconsLoaded &&
+        iconPath != null &&
+        !iconPath.startsWith('assets/') &&
+        File(iconPath).existsSync()) {
+      final String path = iconPath;
+      image = _iconCache.putIfAbsent(
+        path,
+        () => Image.file(
+          File(path),
+          fit: BoxFit.cover,
+          cacheWidth: 112,
+          gaplessPlayback: true,
+        ),
+      );
+    } else {
+      image = Image.asset(defaultIconPath, fit: BoxFit.cover);
+    }
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(size * 0.28),
+      child: SizedBox(width: size, height: size, child: image),
+    );
+  }
+
   Widget _buildAppList() => ListView.builder(
         padding: const EdgeInsets.all(8),
         itemCount: _filteredData.length,
@@ -1077,16 +1175,25 @@ class _AppManagerPageState extends State<AppManagerPage> {
               child: Column(
                 children: [
                   ListTile(
-                    leading: _TippableCheckbox(
-                      app: app,
-                      onChanged: () {
-                        setState(() {
-                          ManagerService.updateActionCounters();
-                          _triggerApplyHint();
-                        });
-                      },
-                      index: index,
-                      hintKey: index == 0 ? _firstCheckboxHintKey : null,
+                    leading: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        _TippableCheckbox(
+                          app: app,
+                          onChanged: () {
+                            setState(() {
+                              ManagerService.updateActionCounters();
+                              _triggerApplyHint();
+                            });
+                          },
+                          index: index,
+                          hintKey: index == 0 ? _firstCheckboxHintKey : null,
+                        ),
+                        if (_showIcons && ManagerService.iconsLoaded) ...[
+                          const SizedBox(width: 6),
+                          _appIconWidget(app, 40),
+                        ],
+                      ],
                     ),
                     title: Text(
                       app['name'],
@@ -1149,27 +1256,20 @@ class _AppManagerPageState extends State<AppManagerPage> {
   Widget _buildIconGrid(double availableWidth) {
     return GridView.builder(
       padding: const EdgeInsets.all(8),
-      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 140,
-        childAspectRatio: 0.75,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 150,
+        childAspectRatio: 0.72,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
       ),
       itemCount: _filteredData.length,
       itemBuilder: (context, index) {
         final app = _filteredData[index];
-        final label = app['name'].length > 18 ? '${app['name'].substring(0, 16)}…' : app['name'];
-        final iconPath = app['iconPath'] as String;
-
-        if (!_iconCache.containsKey(iconPath)) {
-          _iconCache[iconPath] = Image.file(
-            File(iconPath),
-            width: 56,
-            height: 56,
-            fit: BoxFit.cover,
-            cacheWidth: 112,
-          );
-        }
+        final iconPath = app['iconPath'] as String?;
+        final showRealIcon = _showIcons &&
+            ManagerService.iconsLoaded &&
+            iconPath != null &&
+            !iconPath.startsWith('assets/');
 
         return FadeIn(
           duration: const Duration(milliseconds: 100),
@@ -1178,7 +1278,7 @@ class _AppManagerPageState extends State<AppManagerPage> {
             margin: EdgeInsets.zero,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -1193,49 +1293,47 @@ class _AppManagerPageState extends State<AppManagerPage> {
                     activeColor: Colors.blue,
                     checkColor: Colors.white,
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    visualDensity: const VisualDensity(horizontal: -2, vertical: -2),
                   ),
                   const SizedBox(height: 4),
                   MouseRegion(
-                    onEnter: (_) => setState(() => app['isHovering'] = true),
-                    onExit: (_) => setState(() => app['isHovering'] = false),
+                    onEnter: showRealIcon ? (_) => setState(() => app['isHovering'] = true) : null,
+                    onExit: showRealIcon ? (_) => setState(() => app['isHovering'] = false) : null,
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: _iconCache[iconPath],
-                        ),
-                        AnimatedOpacity(
-                          opacity: app['isHovering'] == true ? 1 : 0,
-                          duration: const Duration(milliseconds: 180),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: Container(
-                              width: 56,
-                              height: 56,
-                              color: const Color.fromRGBO(0, 0, 0, 0.45),
-                              child: Center(
-                                child: IconButton(
-                                  icon: const Icon(Icons.download_rounded, color: Colors.white, size: 28),
-                                  tooltip: Localization.translate('export_icon'),
-                                  onPressed: () async => await FileManager.exportAppIcon(context, app['package'], app['iconPath']),
+                        _appIconWidget(app, 56),
+                        if (showRealIcon)
+                          AnimatedOpacity(
+                            opacity: app['isHovering'] == true ? 1 : 0,
+                            duration: const Duration(milliseconds: 180),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: Container(
+                                width: 56,
+                                height: 56,
+                                color: const Color.fromRGBO(0, 0, 0, 0.45),
+                                child: Center(
+                                  child: IconButton(
+                                    icon: const Icon(Icons.download_rounded, color: Colors.white, size: 28),
+                                    tooltip: Localization.translate('export_icon'),
+                                    onPressed: () async => await FileManager.exportAppIcon(context, app['package'], app['iconPath']),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 6),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Text(
-                        label,
-                        style: const TextStyle(fontSize: 13),
+                        app['name'],
+                        style: const TextStyle(fontSize: 12.5, height: 1.25, fontWeight: FontWeight.w500),
                         textAlign: TextAlign.center,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
                       ),
                     ),
                   ),
@@ -1376,7 +1474,7 @@ class _AppManagerPageState extends State<AppManagerPage> {
         _firstCheckboxHintKey.currentState?.showHint();
       });
     });
-    if (_loadIcons) await _loadAppIcons();
+    if (_showIcons) await _loadAppIcons();
     _isLoadingNotifier.value = false;
     setState(() {});
   }
@@ -1385,16 +1483,17 @@ class _AppManagerPageState extends State<AppManagerPage> {
     final success = await ManagerService.loadAppIcons(context, iconsDirPath, defaultIconPath);
     if (success) {
       for (var app in ManagerService.apps.values) {
-        final iconPath = app['iconPath'] as String;
-        if (!_iconCache.containsKey(iconPath)) {
-          _iconCache[iconPath] = Image.file(
+        final iconPath = app['iconPath'] as String?;
+        if (iconPath == null || iconPath.startsWith('assets/')) continue;
+        _iconCache.putIfAbsent(
+          iconPath,
+          () => Image.file(
             File(iconPath),
-            width: 56,
-            height: 56,
             fit: BoxFit.cover,
             cacheWidth: 112,
-          );
-        }
+            gaplessPlayback: true,
+          ),
+        );
       }
     }
     _iconsReadyNotifier.value = success;
