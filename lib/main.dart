@@ -28,7 +28,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ConfigUtils.load();
   await Localization.loadLanguages();
-  await Localization.loadLocale(ConfigUtils.currentLanguage ?? 'en');
+  ConfigUtils.currentLanguage ??= Localization.resolveSystemLanguage();
+  await Localization.loadLocale(ConfigUtils.currentLanguage!);
   appSupportDir = (await getApplicationSupportDirectory()).path;
   iconsDirPath = '$appSupportDir${Platform.pathSeparator}icons${Platform.pathSeparator}'.replaceAll('\\', '/');
   runApp(const MyApp());

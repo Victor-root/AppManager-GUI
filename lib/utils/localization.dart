@@ -28,6 +28,15 @@ class Localization {
     }
   }
 
+  /// Returns the best-matching language code for the current system locale,
+  /// or 'en' when the system language has no bundled translation. Used as the
+  /// default on first launch, before the user has picked a language.
+  static String resolveSystemLanguage() {
+    final systemCode =
+        WidgetsBinding.instance.platformDispatcher.locale.languageCode.toLowerCase();
+    return ConfigUtils.availableLanguages.containsKey(systemCode) ? systemCode : 'en';
+  }
+
   static Future<void> _ensureFallbackLocale() async {
     if (_fallbackLocale != null) return;
     try {

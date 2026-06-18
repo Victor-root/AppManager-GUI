@@ -51,14 +51,14 @@ class ConfigUtils {
         alwaysShowIcons = config['alwaysShowIcons'] ?? false;
         adbPath = config['adbPath'];
         firstSteps = List<String>.from(config['firstSteps'] ?? []);
-        currentLanguage = config['currentLanguage'] ?? 'en';
+        currentLanguage = config['currentLanguage'];
         isFirstLaunch = config['isFirstLaunch'] ?? true;
       } else {
-        currentLanguage = 'en';
+        currentLanguage = null;
         isFirstLaunch = true;
       }
     } catch (e) {
-      currentLanguage = 'en';
+      currentLanguage = null;
       isFirstLaunch = true;
     }
   }
