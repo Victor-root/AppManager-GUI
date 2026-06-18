@@ -42,8 +42,8 @@
   <translation key="log_tooltip">Ver último registro</translation>
   <translation key="browse_tooltip">Importar datos de la comunidad</translation>
   <translation key="settings_tooltip">Ajustes</translation>
-  <translation key="icon_view_tooltip">Alternar vista de íconos</translation>
-  <translation key="view_mode_tooltip">Elige entre vista de lista y mosaico</translation>
+  <translation key="list_view_tooltip">Vista compacta</translation>
+  <translation key="mosaic_view_tooltip">Mostrar iconos</translation>
   <translation key="import_tooltip">Importar acciones</translation>
   <translation key="export_tooltip">Exportar acciones actuales</translation>
   <translation key="select_adb_tooltip">Selecciona la ruta donde está el ejecutable ADB</translation>

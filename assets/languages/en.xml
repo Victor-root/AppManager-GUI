@@ -42,8 +42,8 @@
   <translation key="log_tooltip">View last log</translation>
   <translation key="browse_tooltip">Import community data</translation>
   <translation key="settings_tooltip">Settings</translation>
-  <translation key="icon_view_tooltip">Show app icons in both list and mosaic views</translation>
-  <translation key="view_mode_tooltip">Choose between list and mosaic view</translation>
+  <translation key="list_view_tooltip">Compact view</translation>
+  <translation key="mosaic_view_tooltip">Show icons</translation>
   <translation key="import_tooltip">Import actions</translation>
   <translation key="export_tooltip">Export current actions</translation>
   <translation key="select_adb_tooltip">Select the path where the ADB executable is located</translation>

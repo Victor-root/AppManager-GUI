@@ -22,6 +22,8 @@ const defaultIconPath = 'assets/images/default_app_icon.png';
 late final String appSupportDir;
 late final String iconsDirPath;
 
+enum ViewMode { list, mosaic }
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ConfigUtils.load();
@@ -356,7 +358,7 @@ class _AppManagerPageState extends State<AppManagerPage> {
   String _sortBy = 'name';
   double _panelWidth = 300;
   bool _isPanelVisible = true;
-  String _viewMode = 'list';
+  ViewMode _viewMode = ViewMode.list;
   bool _showIcons = false;
   final ValueNotifier<bool> _isLoadingNotifier = ValueNotifier(false);
   final ValueNotifier<bool> _iconsReadyNotifier = ValueNotifier(false);
@@ -576,7 +578,7 @@ class _AppManagerPageState extends State<AppManagerPage> {
                             ),
                           ),
                           Expanded(
-                            child: _viewMode == 'mosaic'
+                            child: _viewMode == ViewMode.mosaic
                                 ? _buildIconGrid(constraints.maxWidth)
                                 : _buildAppList(),
                           ),
@@ -939,23 +941,6 @@ class _AppManagerPageState extends State<AppManagerPage> {
                                                       message: Localization.translate('view_mode_tooltip'),
                                                       child: _buildViewModeSelector(),
                                                     ),
-                                                    const SizedBox(height: 4),
-                                                    Tooltip(
-                                                      message: Localization.translate('icon_view_tooltip'),
-                                                      child: Material(
-                                                        type: MaterialType.transparency,
-                                                        child: SwitchListTile(
-                                                          title: Text(Localization.translate('icon_view'), style: const TextStyle(fontSize: 13, color: Colors.white70), overflow: TextOverflow.ellipsis),
-                                                          value: _showIcons,
-                                                          onChanged: _setShowIcons,
-                                                          contentPadding: EdgeInsets.zero,
-                                                          activeTrackColor: Colors.blueAccent.withOpacity(0.5),
-                                                          inactiveTrackColor: Colors.grey[700],
-                                                          inactiveThumbColor: Colors.white70,
-                                                          visualDensity: const VisualDensity(horizontal: -2, vertical: -2),
-                                                        ),
-                                                      ),
-                                                    ),
                                                   ],
                                                 ),
                                               ),
@@ -1131,19 +1116,26 @@ class _AppManagerPageState extends State<AppManagerPage> {
         ),
         child: Row(
           children: [
-            _viewModeOption('list', Icons.view_list_rounded, Localization.translate('list_view')),
+            _viewModeOption(ViewMode.list, Icons.view_list_rounded, Localization.translate('list_view'), Localization.translate('list_view_tooltip')),
             const SizedBox(width: 3),
-            _viewModeOption('mosaic', Icons.grid_view_rounded, Localization.translate('mosaic_view')),
+            _viewModeOption(ViewMode.mosaic, Icons.grid_view_rounded, Localization.translate('mosaic_view'), Localization.translate('mosaic_view_tooltip')),
           ],
         ),
       );
 
-  Widget _viewModeOption(String mode, IconData icon, String label) {
+  Widget _viewModeOption(ViewMode mode, IconData icon, String label, String tooltip) {
     final selected = _viewMode == mode;
     return Expanded(
-      child: GestureDetector(
-        onTap: () => setState(() => _viewMode = mode),
-        child: AnimatedContainer(
+      child: Tooltip(
+        message: tooltip,
+        child: GestureDetector(
+          onTap: () async {
+            setState(() => _viewMode = mode);
+            if (mode == ViewMode.mosaic && !_showIcons) {
+              await _setShowIcons(true);
+            }
+          },
+          child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
           decoration: BoxDecoration(
@@ -1171,7 +1163,8 @@ class _AppManagerPageState extends State<AppManagerPage> {
           ),
         ),
       ),
-    );
+    ),
+  );
   }
 
   Widget _appIconWidget(Map<String, dynamic> app, double size) {

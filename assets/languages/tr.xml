@@ -42,8 +42,8 @@
   <translation key="log_tooltip">Son işlem kaydını görüntüle</translation>
   <translation key="browse_tooltip">Topluluk verilerini içe aktar</translation>
   <translation key="settings_tooltip">Ayarlar</translation>
-  <translation key="icon_view_tooltip">Simge görünümünü aç/kapat</translation>
-  <translation key="view_mode_tooltip">Liste ve mozaik görünümü arasında seçim yapın</translation>
+  <translation key="list_view_tooltip">Sade görünüm</translation>
+  <translation key="mosaic_view_tooltip">Simgeleri göster</translation>
   <translation key="import_tooltip">İşlemleri içe aktar</translation>
   <translation key="export_tooltip">Mevcut işlemleri dışa aktar</translation>
   <translation key="select_adb_tooltip">ADB çalıştırılabilir dosyasının bulunduğu yolu seçin</translation>

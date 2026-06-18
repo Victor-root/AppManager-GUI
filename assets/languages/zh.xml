@@ -42,8 +42,8 @@
   <translation key="log_tooltip">查看最新日志</translation>
   <translation key="browse_tooltip">导入社区数据</translation>
   <translation key="settings_tooltip">设置</translation>
-  <translation key="icon_view_tooltip">切换图标视图</translation>
-  <translation key="view_mode_tooltip">在列表视图和马赛克视图之间选择</translation>
+  <translation key="list_view_tooltip">紧凑视图</translation>
+  <translation key="mosaic_view_tooltip">显示图标</translation>
   <translation key="import_tooltip">导入操作</translation>
   <translation key="export_tooltip">导出当前操作</translation>
   <translation key="select_adb_tooltip">选择ADB可执行文件所在路径</translation>

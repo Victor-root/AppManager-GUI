@@ -42,8 +42,8 @@
   <translation key="log_tooltip">Просмотреть последний журнал</translation>
   <translation key="browse_tooltip">Импортировать данные сообщества</translation>
   <translation key="settings_tooltip">Настройки</translation>
-  <translation key="icon_view_tooltip">Переключить вид иконок</translation>
-  <translation key="view_mode_tooltip">Выберите между списком и мозаикой</translation>
+  <translation key="list_view_tooltip">Компактный вид</translation>
+  <translation key="mosaic_view_tooltip">Показать иконки</translation>
   <translation key="import_tooltip">Импортировать действия</translation>
   <translation key="export_tooltip">Экспортировать текущие действия</translation>
   <translation key="select_adb_tooltip">Выберите путь к исполняемому файлу ADB</translation>

@@ -42,8 +42,8 @@
   <translation key="log_tooltip">最新のログを表示</translation>
   <translation key="browse_tooltip">コミュニティデータをインポート</translation>
   <translation key="settings_tooltip">設定</translation>
-  <translation key="icon_view_tooltip">アイコンビューを切り替え</translation>
-  <translation key="view_mode_tooltip">リスト表示とモザイク表示を切り替えます</translation>
+  <translation key="list_view_tooltip">コンパクト表示</translation>
+  <translation key="mosaic_view_tooltip">アイコン表示</translation>
   <translation key="import_tooltip">アクションをインポート</translation>
   <translation key="export_tooltip">現在のアクションをエクスポート</translation>
   <translation key="select_adb_tooltip">ADB実行ファイルの場所を選択</translation>

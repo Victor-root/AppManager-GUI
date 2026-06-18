@@ -42,8 +42,8 @@
   <translation key="log_tooltip">Vezi ultimul jurnal</translation>
   <translation key="browse_tooltip">Importă date comunitare</translation>
   <translation key="settings_tooltip">Setări</translation>
-  <translation key="icon_view_tooltip">Comută vizualizarea cu pictograme</translation>
-  <translation key="view_mode_tooltip">Alege între vizualizarea listă și mozaic</translation>
+  <translation key="list_view_tooltip">Afișare compactă</translation>
+  <translation key="mosaic_view_tooltip">Afișare pictograme</translation>
   <translation key="import_tooltip">Importă acțiuni</translation>
   <translation key="export_tooltip">Exportă acțiunile curente</translation>
   <translation key="select_adb_tooltip">Selectează calea către executabilul ADB</translation>

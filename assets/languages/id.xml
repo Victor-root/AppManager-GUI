@@ -42,8 +42,8 @@
   <translation key="log_tooltip">Lihat log terakhir</translation>
   <translation key="browse_tooltip">Impor data komunitas</translation>
   <translation key="settings_tooltip">Pengaturan</translation>
-  <translation key="icon_view_tooltip">Alihkan tampilan ikon</translation>
-  <translation key="view_mode_tooltip">Pilih antara tampilan daftar dan mozaik</translation>
+  <translation key="list_view_tooltip">Tampilan ringkas</translation>
+  <translation key="mosaic_view_tooltip">Tampilkan ikon</translation>
   <translation key="import_tooltip">Impor tindakan</translation>
   <translation key="export_tooltip">Ekspor tindakan saat ini</translation>
   <translation key="select_adb_tooltip">Pilih lokasi file eksekusi ADB</translation>
