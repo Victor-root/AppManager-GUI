@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:app_manager/models/device_info.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:app_manager/utils/localization.dart';
+import 'package:app_manager/utils/app_theme.dart';
 
 class AdbOverlay {
   static Future<DeviceInfo?> showDeviceSelector(BuildContext context, List<DeviceInfo> devices) async {
@@ -26,7 +27,7 @@ class _DeviceSelectorDialog extends StatelessWidget {
         final parentHeight = constraints.maxHeight;
         final tableWidth = parentWidth * 0.65;
         return AlertDialog(
-          backgroundColor: Colors.grey[900],
+          backgroundColor: AppColors.of(context).background,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           insetPadding: EdgeInsets.symmetric(
             horizontal: parentWidth * 0.1,
@@ -34,7 +35,7 @@ class _DeviceSelectorDialog extends StatelessWidget {
           ),
           title: FadeIn(
             duration: const Duration(milliseconds: 300),
-            child: Text(Localization.translate('select_device'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 20)),
+            child: Text(Localization.translate('select_device'), style: TextStyle(color: AppColors.of(context).foreground, fontWeight: FontWeight.w600, fontSize: 20)),
           ),
           content: SizedBox(
             width: parentWidth * 0.8,
@@ -44,10 +45,10 @@ class _DeviceSelectorDialog extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Card(
                   elevation: 2.0,
-                  color: Colors.grey[850],
+                  color: AppColors.of(context).surface,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   child: DataTable(
-                    headingRowColor: WidgetStateProperty.all(Colors.blueGrey[800]),
+                    headingRowColor: WidgetStateProperty.all(AppColors.of(context).buttonSurfaceVariant),
                     columnSpacing: 16,
                     columns: [
                       DataColumn(
@@ -58,7 +59,7 @@ class _DeviceSelectorDialog extends StatelessWidget {
                           ),
                           child: Text(
                             Localization.translate('action'),
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: AppColors.of(context).foreground),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -71,7 +72,7 @@ class _DeviceSelectorDialog extends StatelessWidget {
                           ),
                           child: Text(
                             Localization.translate('name'),
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: AppColors.of(context).foreground),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -84,7 +85,7 @@ class _DeviceSelectorDialog extends StatelessWidget {
                           ),
                           child: Text(
                             Localization.translate('connection'),
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: AppColors.of(context).foreground),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -97,7 +98,7 @@ class _DeviceSelectorDialog extends StatelessWidget {
                           ),
                           child: Text(
                             Localization.translate('serial'),
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: AppColors.of(context).foreground),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -136,7 +137,7 @@ class _DeviceSelectorDialog extends StatelessWidget {
                                 duration: const Duration(milliseconds: 300),
                                 child: Text(
                                   device.name,
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: AppColors.of(context).foreground),
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
@@ -161,7 +162,7 @@ class _DeviceSelectorDialog extends StatelessWidget {
                                     Expanded(
                                       child: Text(
                                         device.connection,
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(color: AppColors.of(context).foreground),
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
@@ -180,7 +181,7 @@ class _DeviceSelectorDialog extends StatelessWidget {
                                 duration: const Duration(milliseconds: 300),
                                 child: Text(
                                   device.serial,
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: AppColors.of(context).foreground),
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
@@ -198,7 +199,7 @@ class _DeviceSelectorDialog extends StatelessWidget {
             FadeIn(
               duration: const Duration(milliseconds: 300),
               child: TextButton(
-                child: Text(Localization.translate('cancel'), style: TextStyle(color: Colors.white, fontSize: 14)),
+                child: Text(Localization.translate('cancel'), style: TextStyle(color: AppColors.of(context).foreground, fontSize: 14)),
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ),

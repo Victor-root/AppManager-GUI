@@ -4,6 +4,7 @@ import 'package:app_manager/utils/url.dart';
 import 'package:app_manager/utils/file_manager.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:app_manager/utils/localization.dart';
+import 'package:app_manager/utils/app_theme.dart';
 
 class Alert {
   static void showWarning(BuildContext context, String message, {String? command}) {
@@ -27,7 +28,7 @@ class Alert {
       context: context,
       barrierDismissible: true,
       builder: (_) => AlertDialog(
-        backgroundColor: Colors.grey[900],
+        backgroundColor: AppColors.of(context).background,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         content: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -43,7 +44,7 @@ class Alert {
                 duration: const Duration(milliseconds: 300),
                 child: Text(
                   Localization.translate('device_offline_message'),
-                  style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
+                  style: TextStyle(color: AppColors.of(context).foreground, fontSize: 16, fontWeight: FontWeight.w500),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -54,7 +55,7 @@ class Alert {
           FadeIn(
             duration: const Duration(milliseconds: 300),
             child: TextButton(
-              child: Text(Localization.translate('ok'), style: TextStyle(color: Colors.white, fontSize: 14)),
+              child: Text(Localization.translate('ok'), style: TextStyle(color: AppColors.of(context).foreground, fontSize: 14)),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ),
@@ -93,7 +94,7 @@ class _WarningDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.grey[900],
+      backgroundColor: AppColors.of(context).background,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       content: Padding(
         padding: const EdgeInsets.all(24.0),
@@ -109,7 +110,7 @@ class _WarningDialog extends StatelessWidget {
               duration: const Duration(milliseconds: 300),
               child: Text(
                 message,
-                style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
+                style: TextStyle(color: AppColors.of(context).foreground, fontSize: 16, fontWeight: FontWeight.w500),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -120,7 +121,7 @@ class _WarningDialog extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.grey[700]!),
+                  border: Border.all(color: AppColors.of(context).surfaceMuted),
                 ),
                 padding: EdgeInsets.all(12),
                 child: SingleChildScrollView(
@@ -142,7 +143,7 @@ class _WarningDialog extends StatelessWidget {
                               children: [
                                 Text(
                                   Localization.translate('adb_path_instruction'),
-                                  style: TextStyle(color: Colors.white, fontSize: 14),
+                                  style: TextStyle(color: AppColors.of(context).foreground, fontSize: 14),
                                   textAlign: TextAlign.center,
                                 ),
                                 SizedBox(height: 12),
@@ -150,8 +151,8 @@ class _WarningDialog extends StatelessWidget {
                                   duration: const Duration(milliseconds: 300),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.grey[800],
-                                      foregroundColor: Colors.white,
+                                      backgroundColor: AppColors.of(context).surfaceVariant,
+                                      foregroundColor: AppColors.of(context).foreground,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8),
                                       ),
@@ -182,7 +183,7 @@ class _WarningDialog extends StatelessWidget {
                                 children: [
                                   Text(
                                     Localization.translate('adb_install_instruction'),
-                                    style: TextStyle(color: Colors.white, fontSize: 14),
+                                    style: TextStyle(color: AppColors.of(context).foreground, fontSize: 14),
                                     textAlign: TextAlign.left,
                                   ),
                                   SizedBox(height: 8),
@@ -205,7 +206,7 @@ class _WarningDialog extends StatelessWidget {
                                             duration: const Duration(milliseconds: 300),
                                             child: IconButton(
                                               tooltip: Localization.translate('copy'),
-                                              icon: Icon(Icons.copy, color: Colors.white),
+                                              icon: Icon(Icons.copy, color: AppColors.of(context).foreground),
                                               onPressed: () {
                                                 Clipboard.setData(ClipboardData(text: command!));
                                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -245,7 +246,7 @@ class _WarningDialog extends StatelessWidget {
         FadeIn(
           duration: const Duration(milliseconds: 300),
           child: TextButton(
-            child: Text(Localization.translate('close'), style: TextStyle(color: Colors.white, fontSize: 14)),
+            child: Text(Localization.translate('close'), style: TextStyle(color: AppColors.of(context).foreground, fontSize: 14)),
             onPressed: () => Navigator.of(context).pop(),
           ),
         ),
@@ -266,7 +267,7 @@ class _LogDialog extends StatelessWidget {
         final parentWidth = constraints.maxWidth;
         final parentHeight = constraints.maxHeight;
         return AlertDialog(
-          backgroundColor: Colors.grey[900],
+          backgroundColor: AppColors.of(context).background,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           insetPadding: EdgeInsets.symmetric(
             horizontal: parentWidth * 0.1,
@@ -281,14 +282,14 @@ class _LogDialog extends StatelessWidget {
               SizedBox(width: 8),
               FadeIn(
                 duration: const Duration(milliseconds: 300),
-                child: Text(Localization.translate('execution_log'), style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+                child: Text(Localization.translate('execution_log'), style: TextStyle(color: AppColors.of(context).foreground, fontWeight: FontWeight.w600)),
               ),
               Spacer(),
               FadeIn(
                 duration: const Duration(milliseconds: 300),
                 child: IconButton(
                   tooltip: Localization.translate('copy'),
-                  icon: Icon(Icons.copy, color: Colors.white),
+                  icon: Icon(Icons.copy, color: AppColors.of(context).foreground),
                   onPressed: () {
                     Clipboard.setData(ClipboardData(text: log));
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -314,7 +315,7 @@ class _LogDialog extends StatelessWidget {
                   log,
                   style: TextStyle(
                     fontFamily: 'monospace',
-                    color: Colors.white,
+                    color: AppColors.of(context).foreground,
                     fontSize: 13,
                   ),
                 ),
@@ -325,7 +326,7 @@ class _LogDialog extends StatelessWidget {
             FadeIn(
               duration: const Duration(milliseconds: 300),
               child: TextButton(
-                child: Text(Localization.translate('close'), style: TextStyle(color: Colors.white, fontSize: 14)),
+                child: Text(Localization.translate('close'), style: TextStyle(color: AppColors.of(context).foreground, fontSize: 14)),
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ),

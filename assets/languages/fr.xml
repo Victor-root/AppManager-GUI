@@ -42,6 +42,9 @@
   <translation key="log_tooltip">Voir le dernier journal</translation>
   <translation key="browse_tooltip">Importer des données de la communauté</translation>
   <translation key="settings_tooltip">Réglages</translation>
+  <translation key="theme_light">Clair</translation>
+  <translation key="theme_dark">Sombre</translation>
+  <translation key="theme_system">Système</translation>
   <translation key="list_view_tooltip">Vue compacte</translation>
   <translation key="mosaic_view_tooltip">Afficher les icônes</translation>
   <translation key="import_tooltip">Importer des actions</translation>

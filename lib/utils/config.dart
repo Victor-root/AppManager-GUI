@@ -12,6 +12,7 @@ class ConfigUtils {
   static bool exportAllApps = false;
   static bool refreshIcons = false;
   static bool alwaysShowIcons = false;
+  static String? themeMode;
   static String? adbPath;
   static List<String> firstSteps = [];
   static Map<String, String> availableLanguages = {};
@@ -30,6 +31,7 @@ class ConfigUtils {
       'exportAllApps': exportAllApps,
       'refreshIcons': refreshIcons,
       'alwaysShowIcons': alwaysShowIcons,
+      'themeMode': themeMode,
       'adbPath': adbPath,
       'firstSteps': firstSteps,
       'currentLanguage': currentLanguage,
@@ -49,6 +51,7 @@ class ConfigUtils {
         exportAllApps = config['exportAllApps'] ?? false;
         refreshIcons = config['refreshIcons'] ?? false;
         alwaysShowIcons = config['alwaysShowIcons'] ?? false;
+        themeMode = config['themeMode'];
         adbPath = config['adbPath'];
         firstSteps = List<String>.from(config['firstSteps'] ?? []);
         currentLanguage = config['currentLanguage'] ?? 'en';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app_manager/utils/app_theme.dart';
 import 'package:app_manager/overlays/alert.dart';
 import 'package:app_manager/utils/localization.dart';
 import 'package:app_manager/widgets/language_selector.dart';
@@ -84,7 +85,7 @@ class _IntroductionOverlayState extends State<IntroductionOverlay> with TickerPr
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        backgroundColor: Colors.grey[850]?.withOpacity(0.9),
+        backgroundColor: AppColors.of(context).surface.withOpacity(0.9),
         body: SafeArea(
           child: Stack(
             children: [
@@ -111,8 +112,8 @@ class _IntroductionOverlayState extends State<IntroductionOverlay> with TickerPr
                               position: _welcomeSlideAnimation,
                               child: Text(
                                 Localization.translate('welcome'),
-                                style: const TextStyle(
-                                  color: Colors.white,
+                                style: TextStyle(
+                                  color: AppColors.of(context).foreground,
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -122,8 +123,8 @@ class _IntroductionOverlayState extends State<IntroductionOverlay> with TickerPr
                             const SizedBox(height: 16),
                             Text(
                               Localization.translate('welcome_message'),
-                              style: const TextStyle(
-                                color: Colors.white70,
+                              style: TextStyle(
+                                color: AppColors.of(context).foregroundMuted,
                                 fontSize: 16,
                               ),
                               textAlign: TextAlign.center,
@@ -137,10 +138,10 @@ class _IntroductionOverlayState extends State<IntroductionOverlay> with TickerPr
                                   _contentAnimationController.forward(from: 0.0);
                                 }
                               },
-                              titleStyle: const TextStyle(color: Colors.white, fontSize: 14),
-                              hintStyle: const TextStyle(color: Colors.white70, fontSize: 14),
-                              searchFieldFillColor: Colors.white.withOpacity(0.1),
-                              iconColor: Colors.white70,
+                              titleStyle: TextStyle(color: AppColors.of(context).foreground, fontSize: 14),
+                              hintStyle: TextStyle(color: AppColors.of(context).foregroundMuted, fontSize: 14),
+                              searchFieldFillColor: AppColors.of(context).foreground.withOpacity(0.1),
+                              iconColor: AppColors.of(context).foregroundMuted,
                               borderRadius: BorderRadius.circular(20),
                               listHeight: 200,
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),

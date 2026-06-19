@@ -42,6 +42,9 @@
   <translation key="log_tooltip">最新のログを表示</translation>
   <translation key="browse_tooltip">コミュニティデータをインポート</translation>
   <translation key="settings_tooltip">設定</translation>
+  <translation key="theme_light">ライト</translation>
+  <translation key="theme_dark">ダーク</translation>
+  <translation key="theme_system">システム</translation>
   <translation key="list_view_tooltip">コンパクト表示</translation>
   <translation key="mosaic_view_tooltip">アイコン表示</translation>
   <translation key="import_tooltip">アクションをインポート</translation>

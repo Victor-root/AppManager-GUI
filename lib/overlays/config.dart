@@ -7,6 +7,7 @@ import 'package:app_manager/utils/config.dart';
 import 'package:app_manager/utils/file_manager.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:app_manager/utils/localization.dart';
+import 'package:app_manager/utils/app_theme.dart';
 import 'package:app_manager/widgets/language_selector.dart';
 
 class ConfigOverlay extends StatefulWidget {
@@ -197,7 +198,7 @@ class ConfigOverlayState extends State<ConfigOverlay> with TickerProviderStateMi
   }) {
     return Card(
       elevation: 2.0,
-      color: Colors.grey[850],
+      color: AppColors.of(context).surface,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Column(
         children: [
@@ -209,8 +210,8 @@ class ConfigOverlayState extends State<ConfigOverlay> with TickerProviderStateMi
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(title, style: const TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 14)),
-                  Icon(expanded ? Icons.expand_less : Icons.expand_more, color: Colors.white70, size: 20),
+                  Text(title, style: TextStyle(color: AppColors.of(context).foregroundMuted, fontWeight: FontWeight.bold, fontSize: 14)),
+                  Icon(expanded ? Icons.expand_less : Icons.expand_more, color: AppColors.of(context).foregroundMuted, size: 20),
                 ],
               ),
             ),
@@ -246,11 +247,11 @@ class ConfigOverlayState extends State<ConfigOverlay> with TickerProviderStateMi
           child: ConstrainedBox(
             constraints: BoxConstraints(minWidth: dialogWidth, maxWidth: dialogWidth),
             child: AlertDialog(
-              backgroundColor: Colors.grey[900],
+              backgroundColor: AppColors.of(context).background,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
               title: FadeIn(
                 duration: const Duration(milliseconds: 300),
-                child: Text(Localization.translate('settings'), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 20)),
+                child: Text(Localization.translate('settings'), style: TextStyle(color: AppColors.of(context).foreground, fontWeight: FontWeight.w600, fontSize: 20)),
               ),
               content: SizedBox(
                 width: dialogWidth,
@@ -323,8 +324,8 @@ class ConfigOverlayState extends State<ConfigOverlay> with TickerProviderStateMi
                           message: Localization.translate('select_adb_tooltip'),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.grey[800],
-                              foregroundColor: Colors.white,
+                              backgroundColor: AppColors.of(context).surfaceVariant,
+                              foregroundColor: AppColors.of(context).foreground,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                             ),
                             onPressed: () => FileManager.selectAdbFolder(context),
@@ -341,10 +342,10 @@ class ConfigOverlayState extends State<ConfigOverlay> with TickerProviderStateMi
                         child: LanguageSelectorWidget(
                           onLanguageSelected: _selectLanguage,
                           onLanguageChanged: widget.refreshUI,
-                          titleStyle: const TextStyle(color: Colors.white, fontSize: 14),
-                          hintStyle: const TextStyle(color: Colors.white70, fontSize: 14),
-                          searchFieldFillColor: Colors.white.withOpacity(0.1),
-                          iconColor: Colors.white70,
+                          titleStyle: TextStyle(color: AppColors.of(context).foreground, fontSize: 14),
+                          hintStyle: TextStyle(color: AppColors.of(context).foregroundMuted, fontSize: 14),
+                          searchFieldFillColor: AppColors.of(context).foreground.withOpacity(0.1),
+                          iconColor: AppColors.of(context).foregroundMuted,
                           borderRadius: BorderRadius.circular(12),
                           listHeight: 150,
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -354,14 +355,14 @@ class ConfigOverlayState extends State<ConfigOverlay> with TickerProviderStateMi
                       SizedBox(height: padding),
                       Card(
                         elevation: 2.0,
-                        color: Colors.grey[850],
+                        color: AppColors.of(context).surface,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                         child: Padding(
                           padding: const EdgeInsets.all(padding),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(Localization.translate('tcp_ip'), style: const TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 14)),
+                              Text(Localization.translate('tcp_ip'), style: TextStyle(color: AppColors.of(context).foregroundMuted, fontWeight: FontWeight.bold, fontSize: 14)),
                               SizedBox(height: 8),
                               TextField(
                                 controller: _ipController,
@@ -369,11 +370,11 @@ class ConfigOverlayState extends State<ConfigOverlay> with TickerProviderStateMi
                                   labelText: Localization.translate('device_ip'),
                                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                                   filled: true,
-                                  fillColor: Colors.white.withOpacity(0.1),
+                                  fillColor: AppColors.of(context).foreground.withOpacity(0.1),
                                   hintText: Localization.translate('ip_hint'),
                                 ),
                                 keyboardType: TextInputType.numberWithOptions(decimal: true),
-                                style: const TextStyle(color: Colors.white),
+                                style: TextStyle(color: AppColors.of(context).foreground),
                               ),
                               SizedBox(height: 8),
                               TextField(
@@ -382,11 +383,11 @@ class ConfigOverlayState extends State<ConfigOverlay> with TickerProviderStateMi
                                   labelText: Localization.translate('port'),
                                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                                   filled: true,
-                                  fillColor: Colors.white.withOpacity(0.1),
+                                  fillColor: AppColors.of(context).foreground.withOpacity(0.1),
                                   hintText: Localization.translate('port_hint'),
                                 ),
                                 keyboardType: TextInputType.number,
-                                style: const TextStyle(color: Colors.white),
+                                style: TextStyle(color: AppColors.of(context).foreground),
                               ),
                               SizedBox(height: 12),
                               Row(
@@ -413,7 +414,7 @@ class ConfigOverlayState extends State<ConfigOverlay> with TickerProviderStateMi
                                     label: Text(Localization.translate('disconnect'), style: const TextStyle(fontSize: 14, color: Colors.red)),
                                     onPressed: _disconnecting ? null : _disconnect,
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.grey[800],
+                                      backgroundColor: AppColors.of(context).surfaceVariant,
                                       foregroundColor: Colors.red,
                                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                                       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -439,9 +440,9 @@ class ConfigOverlayState extends State<ConfigOverlay> with TickerProviderStateMi
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(Icons.keyboard_arrow_down, color: Colors.white70, size: 20),
+                          Icon(Icons.keyboard_arrow_down, color: AppColors.of(context).foregroundMuted, size: 20),
                           const SizedBox(width: 4),
-                          Text(Localization.translate('swipe_down'), style: const TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.w300)),
+                          Text(Localization.translate('swipe_down'), style: TextStyle(color: AppColors.of(context).foregroundMuted, fontSize: 12, fontWeight: FontWeight.w300)),
                         ],
                       ),
                     );
@@ -450,7 +451,7 @@ class ConfigOverlayState extends State<ConfigOverlay> with TickerProviderStateMi
                 FadeIn(
                   duration: const Duration(milliseconds: 300),
                   child: TextButton(
-                    child: Text(Localization.translate('close'), style: const TextStyle(color: Colors.white, fontSize: 14)),
+                    child: Text(Localization.translate('close'), style: TextStyle(color: AppColors.of(context).foreground, fontSize: 14)),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                 ),
@@ -476,7 +477,7 @@ class OptionItem extends StatelessWidget {
     return Tooltip(
       message: tooltip,
       child: CheckboxListTile(
-        title: Text(title, style: const TextStyle(color: Colors.white, fontSize: 14)),
+        title: Text(title, style: TextStyle(color: AppColors.of(context).foreground, fontSize: 14)),
         value: value,
         onChanged: onChanged,
         tileColor: Colors.transparent,

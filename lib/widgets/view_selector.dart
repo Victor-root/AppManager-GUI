@@ -1,4 +1,5 @@
 import 'package:app_manager/utils/localization.dart';
+import 'package:app_manager/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
 enum ViewMode { list, mosaic }
@@ -19,22 +20,27 @@ class ViewSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.of(context);
     return Container(
       padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
-        color: Colors.grey[850],
+        color: colors.surface,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.white.withOpacity(0.2)),
+        border: Border.all(color: colors.foreground.withOpacity(0.2)),
       ),
       child: Row(
         children: [
           _viewModeOption(
+              context,
+              colors,
               ViewMode.list,
               Icons.view_list_rounded,
               Localization.translate('list_view'),
               Localization.translate('list_view_tooltip')),
           const SizedBox(width: 3),
           _viewModeOption(
+              context,
+              colors,
               ViewMode.mosaic,
               Icons.grid_view_rounded,
               Localization.translate('mosaic_view'),
@@ -44,8 +50,8 @@ class ViewSelector extends StatelessWidget {
     );
   }
 
-  Widget _viewModeOption(
-      ViewMode mode, IconData icon, String label, String tooltip) {
+  Widget _viewModeOption(BuildContext context, AppColors colors, ViewMode mode,
+      IconData icon, String label, String tooltip) {
     final selected = currentMode == mode;
     return Expanded(
       child: Tooltip(
@@ -68,15 +74,18 @@ class ViewSelector extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(icon,
-                    size: 16, color: selected ? Colors.white : Colors.white60),
+                    size: 16,
+                    color: selected ? Colors.white : colors.foregroundMuted),
                 const SizedBox(width: 6),
                 Flexible(
                   child: Text(
                     label,
                     style: TextStyle(
                       fontSize: 12,
-                      fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
-                      color: selected ? Colors.white : Colors.white60,
+                      fontWeight:
+                          selected ? FontWeight.w600 : FontWeight.w500,
+                      color:
+                          selected ? Colors.white : colors.foregroundMuted,
                     ),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,

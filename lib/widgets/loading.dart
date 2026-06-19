@@ -1,4 +1,5 @@
 import 'package:app_manager/utils/localization.dart';
+import 'package:app_manager/utils/app_theme.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,7 @@ class Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.of(context);
     return ValueListenableBuilder<String>(
       valueListenable: Localization.languageNotifier,
       builder: (context, languageCode, child) {
@@ -29,7 +31,7 @@ class Loading extends StatelessWidget {
               child: CircularProgressIndicator(
                 strokeWidth: 2.5,
                 color: Colors.blueAccent,
-                backgroundColor: Colors.white.withOpacity(0.1),
+                backgroundColor: colors.foreground.withOpacity(0.1),
               ),
             ),
           );
@@ -40,8 +42,8 @@ class Loading extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               child: Text(
                 Localization.translate('no_matches'),
-                style: const TextStyle(
-                  color: Colors.white70,
+                style: TextStyle(
+                  color: colors.foregroundMuted,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),

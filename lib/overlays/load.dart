@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:app_manager/utils/app_theme.dart';
 
 class LoadingOverlay {
   static OverlayEntry? _overlayEntry;
@@ -13,7 +14,7 @@ class LoadingOverlay {
         child: Center(
           child: Card(
             elevation: 2.0,
-            color: Colors.grey[900],
+            color: AppColors.of(context).background,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             child: Padding(
               padding: const EdgeInsets.all(24.0),
@@ -36,7 +37,7 @@ class LoadingOverlay {
                     duration: const Duration(milliseconds: 300),
                     child: Text(
                       message,
-                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
+                      style: TextStyle(color: AppColors.of(context).foreground, fontSize: 18, fontWeight: FontWeight.w500),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -110,7 +111,7 @@ class _LoadingAnimationState extends State<LoadingAnimation>
               margin: EdgeInsets.symmetric(horizontal: 4),
               width: 12,
               height: 12,
-              decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+              decoration: BoxDecoration(color: AppColors.of(context).foreground, shape: BoxShape.circle),
             ),
           ),
         );

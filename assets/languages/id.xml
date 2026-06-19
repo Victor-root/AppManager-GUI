@@ -42,6 +42,9 @@
   <translation key="log_tooltip">Lihat log terakhir</translation>
   <translation key="browse_tooltip">Impor data komunitas</translation>
   <translation key="settings_tooltip">Pengaturan</translation>
+  <translation key="theme_light">Terang</translation>
+  <translation key="theme_dark">Gelap</translation>
+  <translation key="theme_system">Sistem</translation>
   <translation key="list_view_tooltip">Tampilan ringkas</translation>
   <translation key="mosaic_view_tooltip">Tampilkan ikon</translation>
   <translation key="import_tooltip">Impor tindakan</translation>

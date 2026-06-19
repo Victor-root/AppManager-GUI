@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app_manager/utils/app_theme.dart';
 import 'package:app_manager/utils/config.dart';
 
 class HintMessage extends StatefulWidget {
@@ -89,7 +90,7 @@ class HintMessageState extends State<HintMessage> {
           child: Material(
             elevation: 4.0,
             borderRadius: BorderRadius.circular(12.0),
-            color: Colors.grey[900],
+            color: AppColors.of(context).background,
             child: Container(
               width: hintWidth,
               constraints: BoxConstraints(maxHeight: maxHintHeight),
@@ -101,15 +102,15 @@ class HintMessageState extends State<HintMessage> {
                   children: [
                     Text(
                       widget.message,
-                      style: const TextStyle(color: Colors.white, fontSize: 16.0),
+                      style: TextStyle(color: AppColors.of(context).foreground, fontSize: 16.0),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 12.0),
                     ElevatedButton(
                       onPressed: _dismissHint,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[700],
-                        foregroundColor: Colors.white,
+                        backgroundColor: AppColors.of(context).surfaceMuted,
+                        foregroundColor: AppColors.of(context).foreground,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       ),

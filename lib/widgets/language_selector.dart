@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:app_manager/utils/config.dart';
 import 'package:app_manager/utils/localization.dart';
+import 'package:app_manager/utils/app_theme.dart';
 import 'package:app_manager/overlays/alert.dart';
 
 class LanguageSelectorWidget extends StatefulWidget {
@@ -153,26 +154,17 @@ class _LanguageSelectorWidgetState extends State<LanguageSelectorWidget> {
                             child: ListTile(
                               title: Text(
                                 lang['name']!,
-                                style: widget.titleStyle?.copyWith(
-                                      color: ConfigUtils.currentLanguage ==
-                                              lang['code']
-                                          ? Colors.blueAccent
-                                          : Colors.white,
-                                      fontWeight: ConfigUtils.currentLanguage ==
-                                              lang['code']
-                                          ? FontWeight.w600
-                                          : FontWeight.w400,
-                                    ) ??
-                                    TextStyle(
-                                      color: ConfigUtils.currentLanguage ==
-                                              lang['code']
-                                          ? Colors.blueAccent
-                                          : Colors.white,
-                                      fontWeight: ConfigUtils.currentLanguage ==
-                                              lang['code']
-                                          ? FontWeight.w600
-                                          : FontWeight.w400,
-                                    ),
+                                style: TextStyle(
+                                  color: ConfigUtils.currentLanguage ==
+                                          lang['code']
+                                      ? Colors.blueAccent
+                                      : AppColors.of(context).foreground,
+                                  fontWeight: ConfigUtils.currentLanguage ==
+                                          lang['code']
+                                      ? FontWeight.w600
+                                      : FontWeight.w400,
+                                  fontSize: widget.titleStyle?.fontSize ?? 14,
+                                ),
                               ),
                               trailing: ConfigUtils.currentLanguage ==
                                       lang['code']

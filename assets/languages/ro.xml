@@ -42,6 +42,9 @@
   <translation key="log_tooltip">Vezi ultimul jurnal</translation>
   <translation key="browse_tooltip">Importă date comunitare</translation>
   <translation key="settings_tooltip">Setări</translation>
+  <translation key="theme_light">Luminoasă</translation>
+  <translation key="theme_dark">Întunecată</translation>
+  <translation key="theme_system">Sistem</translation>
   <translation key="list_view_tooltip">Afișare compactă</translation>
   <translation key="mosaic_view_tooltip">Afișare pictograme</translation>
   <translation key="import_tooltip">Importă acțiuni</translation>

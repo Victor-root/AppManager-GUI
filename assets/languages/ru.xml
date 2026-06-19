@@ -42,6 +42,9 @@
   <translation key="log_tooltip">Просмотреть последний журнал</translation>
   <translation key="browse_tooltip">Импортировать данные сообщества</translation>
   <translation key="settings_tooltip">Настройки</translation>
+  <translation key="theme_light">Светлая</translation>
+  <translation key="theme_dark">Тёмная</translation>
+  <translation key="theme_system">Системная</translation>
   <translation key="list_view_tooltip">Компактный вид</translation>
   <translation key="mosaic_view_tooltip">Показать иконки</translation>
   <translation key="import_tooltip">Импортировать действия</translation>

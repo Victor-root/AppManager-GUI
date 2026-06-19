@@ -49,8 +49,8 @@ extension _AppListBuild on _AppManagerPageState {
                 ),
                 subtitle: Text(
                   app['package'],
-                  style: const TextStyle(
-                    color: Colors.white70,
+                  style: TextStyle(
+                    color: AppColors.of(context).foregroundMuted,
                     fontSize: 12,
                   ),
                   overflow: TextOverflow.ellipsis,

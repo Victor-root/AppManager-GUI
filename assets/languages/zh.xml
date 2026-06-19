@@ -42,6 +42,9 @@
   <translation key="log_tooltip">查看最新日志</translation>
   <translation key="browse_tooltip">导入社区数据</translation>
   <translation key="settings_tooltip">设置</translation>
+  <translation key="theme_light">浅色</translation>
+  <translation key="theme_dark">深色</translation>
+  <translation key="theme_system">跟随系统</translation>
   <translation key="list_view_tooltip">紧凑视图</translation>
   <translation key="mosaic_view_tooltip">显示图标</translation>
   <translation key="import_tooltip">导入操作</translation>

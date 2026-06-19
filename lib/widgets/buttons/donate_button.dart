@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:app_manager/utils/localization.dart';
 import 'package:app_manager/utils/url.dart';
+import 'package:app_manager/utils/app_theme.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -45,6 +46,7 @@ class _DonateButtonState extends State<DonateButton>
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.of(context);
     return ValueListenableBuilder<String>(
       valueListenable: Localization.languageNotifier,
       builder: (context, languageCode, child) {
@@ -63,15 +65,16 @@ class _DonateButtonState extends State<DonateButton>
                     padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
+                      color: colors.foreground.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.white.withOpacity(0.2)),
+                      border: Border.all(
+                          color: colors.foreground.withOpacity(0.2)),
                       gradient: LinearGradient(
                         begin: Alignment(_shine.value - 1, 0),
                         end: Alignment(_shine.value + 1, 0),
                         colors: [
                           Colors.transparent,
-                          Colors.white.withOpacity(0.2),
+                          colors.foreground.withOpacity(0.15),
                           Colors.transparent,
                         ],
                         stops: const [0.0, 0.5, 1.0],
@@ -80,14 +83,14 @@ class _DonateButtonState extends State<DonateButton>
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.favorite,
-                            color: Colors.white, size: 16),
+                        Icon(Icons.favorite,
+                            color: colors.foreground, size: 16),
                         const SizedBox(width: 6),
                         Flexible(
                           child: Text(
                             Localization.translate('support'),
-                            style: const TextStyle(
-                              color: Colors.white,
+                            style: TextStyle(
+                              color: colors.foreground,
                               fontSize: 13,
                               fontWeight: FontWeight.w600,
                             ),

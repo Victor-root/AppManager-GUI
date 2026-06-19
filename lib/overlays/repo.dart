@@ -6,6 +6,7 @@ import 'package:app_manager/overlays/alert.dart';
 import 'package:app_manager/utils/url.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:app_manager/utils/localization.dart';
+import 'package:app_manager/utils/app_theme.dart';
 
 class ReposOverlay extends StatefulWidget {
   final VoidCallback? refreshUI;
@@ -105,7 +106,7 @@ class _ReposOverlayState extends State<ReposOverlay> {
         final parentWidth = constraints.maxWidth;
         final parentHeight = constraints.maxHeight;
         return AlertDialog(
-          backgroundColor: Colors.grey[900],
+          backgroundColor: AppColors.of(context).background,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           insetPadding: EdgeInsets.symmetric(
             horizontal: parentWidth * 0.1,
@@ -129,10 +130,10 @@ class _ReposOverlayState extends State<ReposOverlay> {
                             focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                             enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                             filled: true,
-                            fillColor: Colors.white.withOpacity(0.1),
-                            hintStyle: const TextStyle(color: Colors.white70),
+                            fillColor: AppColors.of(context).foreground.withOpacity(0.1),
+                            hintStyle: TextStyle(color: AppColors.of(context).foregroundMuted),
                           ),
-                          style: const TextStyle(color: Colors.white),
+                          style: TextStyle(color: AppColors.of(context).foreground),
                           onSubmitted: (_) => _searchRepos(),
                         ),
                       ),
@@ -143,7 +144,7 @@ class _ReposOverlayState extends State<ReposOverlay> {
                       child: Tooltip(
                         message: Localization.translate('search_repos_tooltip'),
                         child: IconButton(
-                          icon: const Icon(Icons.search, color: Colors.white),
+                          icon: Icon(Icons.search, color: AppColors.of(context).foreground),
                           onPressed: _isLoading ? null : _searchRepos,
                         ),
                       ),
@@ -153,7 +154,7 @@ class _ReposOverlayState extends State<ReposOverlay> {
                       child: Tooltip(
                         message: Localization.translate('reload_repos_tooltip'),
                         child: IconButton(
-                          icon: const Icon(Icons.refresh, color: Colors.white),
+                          icon: Icon(Icons.refresh, color: AppColors.of(context).foreground),
                           onPressed: _isLoading ? null : () => _loadRepos(forceRefresh: true),
                         ),
                       ),
@@ -186,7 +187,7 @@ class _ReposOverlayState extends State<ReposOverlay> {
                                 duration: const Duration(milliseconds: 300),
                                 child: Card(
                                   elevation: 2.0,
-                                  color: Colors.grey[850],
+                                  color: AppColors.of(context).surface,
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                                   margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                                   child: Padding(
@@ -203,7 +204,7 @@ class _ReposOverlayState extends State<ReposOverlay> {
                                                   Expanded(
                                                     child: Text(
                                                       repo['name']?.toString() ?? Localization.translate('unknown_repo_name'),
-                                                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                                      style: TextStyle(color: AppColors.of(context).foreground, fontWeight: FontWeight.bold),
                                                       overflow: TextOverflow.ellipsis,
                                                     ),
                                                   ),
@@ -211,7 +212,7 @@ class _ReposOverlayState extends State<ReposOverlay> {
                                                   Container(
                                                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                                     decoration: BoxDecoration(
-                                                      color: Colors.black,
+                                                      color: AppColors.of(context).buttonSurfaceVariant,
                                                       borderRadius: BorderRadius.circular(12),
                                                     ),
                                                     child: Text(
@@ -220,7 +221,7 @@ class _ReposOverlayState extends State<ReposOverlay> {
                                                           : repo['owner']['type'] == 'User' && repo['owner']['login'] == 'AppManager'
                                                               ? Localization.translate('unknown_owner')
                                                               : repo['owner']['login']?.toString() ?? Localization.translate('unknown_owner'),
-                                                      style: const TextStyle(color: Colors.white, fontSize: 12),
+                                                      style: TextStyle(color: AppColors.of(context).foreground, fontSize: 12),
                                                     ),
                                                   ),
                                                   const SizedBox(width: 8),
@@ -228,13 +229,13 @@ class _ReposOverlayState extends State<ReposOverlay> {
                                                   const SizedBox(width: 4),
                                                   Text(
                                                     (repo['stargazers_count'] as int?)?.toString() ?? 'N/A',
-                                                    style: const TextStyle(color: Colors.white, fontSize: 12),
+                                                    style: TextStyle(color: AppColors.of(context).foreground, fontSize: 12),
                                                   ),
                                                   const SizedBox(width: 8),
                                                   FadeIn(
                                                     duration: const Duration(milliseconds: 300),
                                                     child: IconButton(
-                                                      icon: const Icon(Icons.code, color: Colors.white, size: 18),
+                                                      icon: Icon(Icons.code, color: AppColors.of(context).foreground, size: 18),
                                                       tooltip: Localization.translate('open_github_tooltip'),
                                                       padding: EdgeInsets.zero,
                                                       constraints: const BoxConstraints(minWidth: 24, minHeight: 24),
@@ -246,7 +247,7 @@ class _ReposOverlayState extends State<ReposOverlay> {
                                               const SizedBox(height: 4),
                                               Text(
                                                 repo['description']?.toString() ?? Localization.translate('no_description'),
-                                                style: const TextStyle(color: Colors.white70),
+                                                style: TextStyle(color: AppColors.of(context).foregroundMuted),
                                                 maxLines: 2,
                                                 overflow: TextOverflow.ellipsis,
                                               ),
@@ -287,7 +288,7 @@ class _ReposOverlayState extends State<ReposOverlay> {
             FadeIn(
               duration: const Duration(milliseconds: 300),
               child: TextButton(
-                child: Text(Localization.translate('close'), style: TextStyle(color: Colors.white, fontSize: 14)),
+                child: Text(Localization.translate('close'), style: TextStyle(color: AppColors.of(context).foreground, fontSize: 14)),
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ),

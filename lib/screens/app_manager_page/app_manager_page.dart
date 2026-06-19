@@ -15,6 +15,7 @@ import 'package:app_manager/widgets/buttons/donate_button.dart';
 import 'package:app_manager/widgets/checkbox.dart';
 import 'package:app_manager/widgets/loading.dart';
 import 'package:app_manager/widgets/view_selector.dart';
+import 'package:app_manager/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:animate_do/animate_do.dart';
@@ -231,7 +232,7 @@ class _AppManagerPageState extends State<AppManagerPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Colors.grey[900],
+        backgroundColor: AppColors.of(context).background,
         appBar: _buildAppBar(),
         body: LayoutBuilder(
           builder: (context, constraints) => Row(
