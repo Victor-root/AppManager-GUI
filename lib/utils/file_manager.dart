@@ -8,7 +8,7 @@ import 'package:app_manager/utils/localization.dart';
 
 class FileManager {
   static Future<String?> selectDirectory({String? dialogTitle}) async {
-    return await FilePicker.platform.getDirectoryPath(
+    return await FilePicker.getDirectoryPath(
       dialogTitle: dialogTitle ?? Localization.translate('select_directory'),
     );
   }
@@ -77,7 +77,7 @@ class FileManager {
         '${now.month.toString().padLeft(2, '0')}-'
         '${now.year}.json';
 
-    final savePath = await FilePicker.platform.saveFile(
+    final savePath = await FilePicker.saveFile(
       dialogTitle: Localization.translate('export_actions_json'),
       fileName: fileName,
       type: FileType.custom,
@@ -113,7 +113,7 @@ class FileManager {
   }
 
   static Future<void> importAppActions(BuildContext context) async {
-    final result = await FilePicker.platform.pickFiles(
+    final result = await FilePicker.pickFiles(
       dialogTitle: Localization.translate('import_actions_json'),
       type: FileType.custom,
       allowedExtensions: ['json'],
@@ -157,7 +157,7 @@ class FileManager {
     final fileName = '${package}_icon_${now.day.toString().padLeft(2, '0')}-'
         '${now.month.toString().padLeft(2, '0')}-${now.year}.png';
 
-    final savePath = await FilePicker.platform.saveFile(
+    final savePath = await FilePicker.saveFile(
       dialogTitle: Localization.translate('export_app_icon'),
       fileName: fileName,
       type: FileType.custom,

@@ -75,13 +75,15 @@ class _LanguageSelectorWidgetState extends State<LanguageSelectorWidget> {
       try {
         _allLanguages = ConfigUtils.availableLanguages.entries
             .map((entry) => {'code': entry.key, 'name': entry.value})
-            .toList();
+            .toList()
+          ..sort((a, b) => a['name']!.compareTo(b['name']!));
         _filteredLanguages = List.from(_allLanguages);
       } catch (e) {
         _allLanguages = [];
         _filteredLanguages = [];
         if (mounted) {
-          Alert.showWarning(context, Localization.translate('error_loading_languages'));
+          Alert.showWarning(
+              context, Localization.translate('error_loading_languages'));
         }
       }
       _isLoading = false;
@@ -102,17 +104,22 @@ class _LanguageSelectorWidgetState extends State<LanguageSelectorWidget> {
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: Localization.translate('search_languages_hint'),
-                hintStyle: widget.hintStyle ?? const TextStyle(color: Colors.white70, fontSize: 14),
+                hintStyle: widget.hintStyle ??
+                    const TextStyle(color: Colors.white70, fontSize: 14),
                 border: OutlineInputBorder(
-                  borderRadius: widget.borderRadius ?? BorderRadius.circular(12),
+                  borderRadius:
+                      widget.borderRadius ?? BorderRadius.circular(12),
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
-                fillColor: widget.searchFieldFillColor ?? Colors.white.withOpacity(0.1),
-                prefixIcon: Icon(Icons.search, color: widget.iconColor ?? Colors.white70),
+                fillColor: widget.searchFieldFillColor ??
+                    Colors.white.withOpacity(0.1),
+                prefixIcon: Icon(Icons.search,
+                    color: widget.iconColor ?? Colors.white70),
                 contentPadding: const EdgeInsets.symmetric(vertical: 10),
               ),
-              style: widget.titleStyle ?? const TextStyle(color: Colors.white, fontSize: 14),
+              style: widget.titleStyle ??
+                  const TextStyle(color: Colors.white, fontSize: 14),
             ),
           ),
           const SizedBox(height: 16),
@@ -129,8 +136,10 @@ class _LanguageSelectorWidgetState extends State<LanguageSelectorWidget> {
                     ? Center(
                         child: Text(
                           Localization.translate('no_languages_found'),
-                          style: widget.titleStyle?.copyWith(color: Colors.white70) ??
-                              const TextStyle(color: Colors.white70, fontSize: 14),
+                          style: widget.titleStyle
+                                  ?.copyWith(color: Colors.white70) ??
+                              const TextStyle(
+                                  color: Colors.white70, fontSize: 14),
                         ),
                       )
                     : ListView.builder(
@@ -139,38 +148,51 @@ class _LanguageSelectorWidgetState extends State<LanguageSelectorWidget> {
                         itemBuilder: (context, index) {
                           final lang = _filteredLanguages[index];
                           return FadeInUp(
-                            duration: Duration(milliseconds: 300 + (index * 100)),
+                            duration:
+                                Duration(milliseconds: 300 + (index * 100)),
                             child: ListTile(
                               title: Text(
                                 lang['name']!,
                                 style: widget.titleStyle?.copyWith(
-                                      color: ConfigUtils.currentLanguage == lang['code']
+                                      color: ConfigUtils.currentLanguage ==
+                                              lang['code']
                                           ? Colors.blueAccent
                                           : Colors.white,
-                                      fontWeight: ConfigUtils.currentLanguage == lang['code']
+                                      fontWeight: ConfigUtils.currentLanguage ==
+                                              lang['code']
                                           ? FontWeight.w600
                                           : FontWeight.w400,
                                     ) ??
                                     TextStyle(
-                                      color: ConfigUtils.currentLanguage == lang['code']
+                                      color: ConfigUtils.currentLanguage ==
+                                              lang['code']
                                           ? Colors.blueAccent
                                           : Colors.white,
-                                      fontWeight: ConfigUtils.currentLanguage == lang['code']
+                                      fontWeight: ConfigUtils.currentLanguage ==
+                                              lang['code']
                                           ? FontWeight.w600
                                           : FontWeight.w400,
                                     ),
                               ),
-                              trailing: ConfigUtils.currentLanguage == lang['code']
-                                  ? Icon(Icons.check, color: widget.iconColor ?? Colors.blueAccent, size: 20)
+                              trailing: ConfigUtils.currentLanguage ==
+                                      lang['code']
+                                  ? Icon(Icons.check,
+                                      color:
+                                          widget.iconColor ?? Colors.blueAccent,
+                                      size: 20)
                                   : null,
                               onTap: () async {
                                 try {
-                                  await widget.onLanguageSelected(lang['code']!);
+                                  await widget
+                                      .onLanguageSelected(lang['code']!);
                                   widget.onLanguageChanged?.call();
                                   if (mounted) setState(() {});
                                 } catch (e) {
                                   if (mounted) {
-                                    Alert.showWarning(context, Localization.translate('error_selecting_language'));
+                                    Alert.showWarning(
+                                        context,
+                                        Localization.translate(
+                                            'error_selecting_language'));
                                   }
                                 }
                               },
